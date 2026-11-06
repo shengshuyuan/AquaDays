@@ -1,0 +1,23 @@
+# --- Target: FoloToy AI Passport (ESP32-C3, no PSRAM, 8MB flash) ---
+CONFIG_IDF_TARGET="esp32c3"
+CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
+CONFIG_ESPTOOLPY_HEADER_FLASHSIZE_UPDATE=n
+
+# Same partition table as ai-passport: 3 MB factory app, cardid@0x356000 must never move.
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+CONFIG_PARTITION_TABLE_FILENAME="partitions.csv"
+
+# Console on USB-Serial-JTAG: UART0 TX (GPIO21) is the backlight pin on this board.
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y
+CONFIG_ESP_CONSOLE_SECONDARY_NONE=y
+
+CONFIG_COMPILER_OPTIMIZATION_PERF=y
+CONFIG_FREERTOS_HZ=1000
+
+# Matches the browser preview: holding OK for 0.65 s means back.
+CONFIG_BUTTON_LONG_PRESS_TIME_MS=650
+
+# The BSP component still builds its optional LVGL layer.
+CONFIG_LV_COLOR_DEPTH_16=y
+CONFIG_LV_USE_CLIB_MALLOC=y

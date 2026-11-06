@@ -20,7 +20,7 @@
     document.querySelector('#live-status').textContent=state.message&&state.age<state.messageUntil
       ?state.message:`${names[state.mode]} · ${state.fish.length}/${AquaGame.MAX_FISH} 位伙伴 · 今日喂食 ${state.fed}/2 · 水质 ${Math.round(state.water)}%`;
   }
-  function action(key) { AquaGame.press(state,key); draw(); }
+  function action(key) { AquaSound.start(()=>state); AquaGame.press(state,key); draw(); }
   function startKey(key) {
     if(heldKey) return;
     heldKey=key; held=false;
@@ -53,6 +53,9 @@
   document.querySelector('#next-day').addEventListener('click',()=>{
     const next=new Date(`${state.day}T12:00:00+08:00`);next.setUTCDate(next.getUTCDate()+1);
     AquaGame.nextDay(state,dayString(next));draw();
+  });
+  document.querySelector('#idle').addEventListener('click',()=>{
+    state.lastInput=state.age-AquaGame.IDLE_SECONDS;AquaGame.update(state,1/12);draw();
   });
   document.querySelector('#pause').addEventListener('click',e=>{
     paused=!paused;e.target.textContent=paused?'继续动画':'暂停动画';e.target.setAttribute('aria-pressed',String(paused));

@@ -22,7 +22,7 @@
       <div class="screen-wrap"><canvas id="screen" width="240" height="320" tabindex="0" aria-label="AquaDays 240乘320像素鱼缸。使用下方三个按键或方向键和确定键操作。"></canvas></div>
       <div class="hardware-keys"><button data-key="up" aria-label="上键">↑<span>上</span></button><button data-key="ok" aria-label="确定键">●<span>确定 / 长按返回</span></button><button data-key="down" aria-label="下键">↓<span>下</span></button></div>
       <p id="live-status" role="status" aria-live="polite"></p>
-      <div class="demo-tools"><label>光照 <select id="lighting"><option value="auto">跟随时间</option><option value="07:00">白天 07:00</option><option value="18:00">夜晚 18:00</option></select></label><button id="export">导出设计资源</button><button id="reset">重置演示</button><button id="next-day">演示：下一天</button><button id="pause" aria-pressed="false">暂停动画</button></div>
+      <div class="demo-tools"><label>光照 <select id="lighting"><option value="auto">跟随时间</option><option value="07:00">白天 07:00</option><option value="18:00">夜晚 18:00</option></select></label><button id="export">导出设计资源</button><button id="reset">重置演示</button><button id="next-day">演示：下一天</button><button id="idle">演示：3 分钟无操作</button><button id="pause" aria-pressed="false">暂停动画</button></div>
     </div>
   </section>
   <section class="states" aria-labelledby="states-title">
@@ -30,12 +30,12 @@
     <div class="state-grid">
       <figure><canvas id="shot-home" width="240" height="320" aria-label="鱼缸主页静态预览"></canvas><figcaption><b>01 / 看鱼</b><span>六条鱼自由游动，螃蟹在缸底爬行。</span></figcaption></figure>
       <figure><canvas id="shot-select" width="240" height="320" aria-label="真实鱼种选择静态预览"></canvas><figcaption><b>02 / 选鱼</b><span>七种鱼与螃蟹，幼鱼成鱼自己选。</span></figcaption></figure>
-      <figure><canvas id="shot-feed" width="240" height="320" aria-label="每日限量投喂静态预览"></canvas><figcaption><b>03 / 喂食</b><span>鱼会追食。每天两份，吃完就收手。</span></figcaption></figure>
-      <figure><canvas id="shot-clean" width="240" height="320" aria-label="分区擦缸静态预览"></canvas><figcaption><b>04 / 擦缸</b><span>上下换区，确定擦藻，水质逐步恢复。</span></figcaption></figure>
+      <figure><canvas id="shot-feed" width="240" height="320" aria-label="每日限量投喂静态预览"></canvas><figcaption><b>03 / 喂食</b><span>水面撒下一小撮，鱼儿追食。每天两份。</span></figcaption></figure>
+      <figure><canvas id="shot-clean" width="240" height="320" aria-label="三行擦缸静态预览"></canvas><figcaption><b>04 / 擦缸</b><span>玻璃分三行，确定擦一行，三下就干净。</span></figcaption></figure>
     </div>
   </section>
   <footer><span>AquaDays · 一缸时光</span><span>独立设计原型 · 不连接设备 · 刷新后重置进度</span></footer>
 </main>
-<script src="game.js"></script><script src="pixel-font.js"></script><script src="render.js"></script><script src="preview.js"></script>
+<script src="game.js"></script><script src="pixel-font.js"></script><script src="render.js"></script><script src="sound.js"></script><script src="preview.js"></script>
 <script src="export.js"></script>
 </html>

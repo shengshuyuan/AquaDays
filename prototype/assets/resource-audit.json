@@ -1,11 +1,11 @@
 {
   "backgroundBytes": 153600,
   "nightBackgroundBytes": 153600,
-  "spriteBytes": 1450476,
-  "fontBitmapBytes": 3051,
-  "totalBitmapBytes": 1760727,
-  "glyphCount": 217,
-  "spriteFrames": 144,
+  "spriteBytes": 1137012,
+  "fontBitmapBytes": 3123,
+  "totalBitmapBytes": 1447335,
+  "glyphCount": 221,
+  "spriteFrames": 124,
   "targetDisplayBufferBytes": 9600,
-  "note": "Flash asset sizes, not measured firmware heap or frame rate. Adult/juvenile/catalogue and mirrored fish are pre-baked; no runtime image scaling needed."
+  "note": "Flash asset sizes, not measured firmware heap or frame rate. All sizes are pre-baked facing right; mirroring, pitch shear and shading are per-pixel blit operations, no runtime scaling."
 }

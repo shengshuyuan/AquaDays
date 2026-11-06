@@ -22,3 +22,10 @@ bin-release/
 .env
 .env.*
 node_modules/
+
+# Firmware build output
+firmware/build/
+firmware/managed_components/
+firmware/sdkconfig
+firmware/sdkconfig.old
+firmware/host/render_host
