@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>AquaDays · 一缸时光 — 真实像素交互稿</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<main>
+  <header><a class="wordmark" href="#">AquaDays<span>一缸时光</span></a><span class="edition">DESIGN STUDY / 04</span></header>
+  <section class="hero">
+    <div class="intro">
+      <p class="eyebrow">一方小水景，慢慢养起来。</p>
+      <h1>每天见一面，<br>小鱼长大一点。</h1>
+      <p class="lede">挑选喜欢的金鱼，看它们摆尾、转向、追着鱼食游过来。两份鱼食，三处缸壁，一点点照料，攒成有生命感的桌面时光。</p>
+      <dl><div><dt>240 × 320</dt><dd>真实画布像素</dd></div><div><dt>3 个按键</dt><dd>完成全部操作</dd></div><div><dt>12 次 / 秒</dt><dd>本原型动画步进</dd></div></dl>
+      <div class="how"><span class="section-label">先试着喂一份，再擦擦鱼缸</span><p><kbd>↑</kbd><kbd>↓</kbd> 选择操作　<kbd>Enter</kbd> 确定<br><kbd>Enter</kbd> 长按 / <kbd>Esc</kbd> 返回鱼缸</p></div>
+      <p class="boundary">这是 240×320 底图与动态精灵合成的交互稿。<br>尚未烧录设备；浏览器表现不等于真机帧率。</p>
+    </div>
+    <div class="preview">
+      <div class="preview-heading"><span>LIVE / <b id="mode-label">鱼缸</b></span><div class="scales" aria-label="画面放大倍数"><button data-scale="1">1×</button><button data-scale="2" aria-pressed="true">2×</button></div></div>
+      <div class="screen-wrap"><canvas id="screen" width="240" height="320" tabindex="0" aria-label="AquaDays 240乘320像素鱼缸。使用下方三个按键或方向键和确定键操作。"></canvas></div>
+      <div class="hardware-keys"><button data-key="up" aria-label="上键">↑<span>上</span></button><button data-key="ok" aria-label="确定键">●<span>确定 / 长按返回</span></button><button data-key="down" aria-label="下键">↓<span>下</span></button></div>
+      <p id="live-status" role="status" aria-live="polite"></p>
+      <div class="demo-tools"><label>光照 <select id="lighting"><option value="auto">跟随时间</option><option value="07:00">白天 07:00</option><option value="18:00">夜晚 18:00</option></select></label><button id="export">导出设计资源</button><button id="reset">重置演示</button><button id="next-day">演示：下一天</button><button id="pause" aria-pressed="false">暂停动画</button></div>
+    </div>
+  </section>
+  <section class="states" aria-labelledby="states-title">
+    <div class="states-heading"><div><p class="eyebrow">同一套像素，四个游戏状态</p><h2 id="states-title">小屏上，也有养鱼的乐趣。</h2></div><p>以下按 1× 原尺寸显示<br>背景已转换为设备像素尺寸与色彩</p></div>
+    <div class="state-grid">
+      <figure><canvas id="shot-home" width="240" height="320" aria-label="鱼缸主页静态预览"></canvas><figcaption><b>01 / 看鱼</b><span>六条鱼自由游动，螃蟹在缸底爬行。</span></figcaption></figure>
+      <figure><canvas id="shot-select" width="240" height="320" aria-label="真实鱼种选择静态预览"></canvas><figcaption><b>02 / 选鱼</b><span>七种鱼与螃蟹，幼鱼成鱼自己选。</span></figcaption></figure>
+      <figure><canvas id="shot-feed" width="240" height="320" aria-label="每日限量投喂静态预览"></canvas><figcaption><b>03 / 喂食</b><span>鱼会追食。每天两份，吃完就收手。</span></figcaption></figure>
+      <figure><canvas id="shot-clean" width="240" height="320" aria-label="分区擦缸静态预览"></canvas><figcaption><b>04 / 擦缸</b><span>上下换区，确定擦藻，水质逐步恢复。</span></figcaption></figure>
+    </div>
+  </section>
+  <footer><span>AquaDays · 一缸时光</span><span>独立设计原型 · 不连接设备 · 刷新后重置进度</span></footer>
+</main>
+<script src="game.js"></script><script src="pixel-font.js"></script><script src="render.js"></script><script src="preview.js"></script>
+<script src="export.js"></script>
+</html>

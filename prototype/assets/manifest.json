@@ -1,0 +1,3346 @@
+{
+  "byteOrder": "little-endian",
+  "background": {
+    "width": 240,
+    "height": 320,
+    "stride": 480,
+    "format": "RGB565"
+  },
+  "lighting": {
+    "timeZone": "Asia/Shanghai",
+    "dayStartHour": 7,
+    "nightStartHour": 18,
+    "nightBackground": "background-night.rgb565"
+  },
+  "sprites": {
+    "format": "RGB565A8",
+    "layout": "each frame: packed RGB565 plane, then A8 plane",
+    "frames": [
+      {
+        "species": "ryukin",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 0,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ryukin",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 3600,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ryukin",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 7200,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ryukin",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 10800,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ryukin",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 14400,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ryukin",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 18000,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ryukin",
+        "size": 1,
+        "direction": 1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 21600,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ryukin",
+        "size": 1,
+        "direction": 1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 30816,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ryukin",
+        "size": 1,
+        "direction": 1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 40032,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ryukin",
+        "size": 1,
+        "direction": -1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 49248,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ryukin",
+        "size": 1,
+        "direction": -1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 58464,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ryukin",
+        "size": 1,
+        "direction": -1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 67680,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ryukin",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 76896,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "ryukin",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 97632,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "ryukin",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 118368,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "ryukin",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 139104,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "ryukin",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 159840,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "ryukin",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 180576,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "ranchu",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 201312,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ranchu",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 204912,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ranchu",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 208512,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ranchu",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 212112,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ranchu",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 215712,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ranchu",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 219312,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "ranchu",
+        "size": 1,
+        "direction": 1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 222912,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ranchu",
+        "size": 1,
+        "direction": 1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 232128,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ranchu",
+        "size": 1,
+        "direction": 1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 241344,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ranchu",
+        "size": 1,
+        "direction": -1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 250560,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ranchu",
+        "size": 1,
+        "direction": -1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 259776,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ranchu",
+        "size": 1,
+        "direction": -1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 268992,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "ranchu",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 278208,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "ranchu",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 298944,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "ranchu",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 319680,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "ranchu",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 340416,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "ranchu",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 361152,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "ranchu",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 381888,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "oranda",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 402624,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "oranda",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 406224,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "oranda",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 409824,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "oranda",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 413424,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "oranda",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 417024,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "oranda",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 420624,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "oranda",
+        "size": 1,
+        "direction": 1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 424224,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "oranda",
+        "size": 1,
+        "direction": 1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 433440,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "oranda",
+        "size": 1,
+        "direction": 1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 442656,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "oranda",
+        "size": 1,
+        "direction": -1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 451872,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "oranda",
+        "size": 1,
+        "direction": -1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 461088,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "oranda",
+        "size": 1,
+        "direction": -1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 470304,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "oranda",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 479520,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "oranda",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 500256,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "oranda",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 520992,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "oranda",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 541728,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "oranda",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 562464,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "oranda",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 583200,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "moor",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 603936,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "moor",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 607536,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "moor",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 611136,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "moor",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 614736,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "moor",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 618336,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "moor",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 621936,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "moor",
+        "size": 1,
+        "direction": 1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 625536,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "moor",
+        "size": 1,
+        "direction": 1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 634752,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "moor",
+        "size": 1,
+        "direction": 1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 643968,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "moor",
+        "size": 1,
+        "direction": -1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 653184,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "moor",
+        "size": 1,
+        "direction": -1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 662400,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "moor",
+        "size": 1,
+        "direction": -1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 671616,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "moor",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 680832,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "moor",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 701568,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "moor",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 722304,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "moor",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 743040,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "moor",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 763776,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "moor",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 784512,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "pearlscale",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 805248,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "pearlscale",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 808848,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "pearlscale",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 812448,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "pearlscale",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 816048,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "pearlscale",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 819648,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "pearlscale",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 823248,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "pearlscale",
+        "size": 1,
+        "direction": 1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 826848,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "pearlscale",
+        "size": 1,
+        "direction": 1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 836064,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "pearlscale",
+        "size": 1,
+        "direction": 1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 845280,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "pearlscale",
+        "size": 1,
+        "direction": -1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 854496,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "pearlscale",
+        "size": 1,
+        "direction": -1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 863712,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "pearlscale",
+        "size": 1,
+        "direction": -1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 872928,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "pearlscale",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 882144,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "pearlscale",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 902880,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "pearlscale",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 923616,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "pearlscale",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 944352,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "pearlscale",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 965088,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "pearlscale",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 985824,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "shubunkin",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 1006560,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "shubunkin",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 1010160,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "shubunkin",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 1013760,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "shubunkin",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 0,
+        "width": 40,
+        "height": 30,
+        "offset": 1017360,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "shubunkin",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 1,
+        "width": 40,
+        "height": 30,
+        "offset": 1020960,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "shubunkin",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 2,
+        "width": 40,
+        "height": 30,
+        "offset": 1024560,
+        "length": 3600,
+        "stride": 80
+      },
+      {
+        "species": "shubunkin",
+        "size": 1,
+        "direction": 1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 1028160,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "shubunkin",
+        "size": 1,
+        "direction": 1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 1037376,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "shubunkin",
+        "size": 1,
+        "direction": 1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 1046592,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "shubunkin",
+        "size": 1,
+        "direction": -1,
+        "frame": 0,
+        "width": 64,
+        "height": 48,
+        "offset": 1055808,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "shubunkin",
+        "size": 1,
+        "direction": -1,
+        "frame": 1,
+        "width": 64,
+        "height": 48,
+        "offset": 1065024,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "shubunkin",
+        "size": 1,
+        "direction": -1,
+        "frame": 2,
+        "width": 64,
+        "height": 48,
+        "offset": 1074240,
+        "length": 9216,
+        "stride": 128
+      },
+      {
+        "species": "shubunkin",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 1083456,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "shubunkin",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 1104192,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "shubunkin",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 1124928,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "shubunkin",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 0,
+        "width": 96,
+        "height": 72,
+        "offset": 1145664,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "shubunkin",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 1,
+        "width": 96,
+        "height": 72,
+        "offset": 1166400,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "shubunkin",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 2,
+        "width": 96,
+        "height": 72,
+        "offset": 1187136,
+        "length": 20736,
+        "stride": 192
+      },
+      {
+        "species": "guppy",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 0,
+        "width": 32,
+        "height": 24,
+        "offset": 1207872,
+        "length": 2304,
+        "stride": 64
+      },
+      {
+        "species": "guppy",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 1,
+        "width": 32,
+        "height": 24,
+        "offset": 1210176,
+        "length": 2304,
+        "stride": 64
+      },
+      {
+        "species": "guppy",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 2,
+        "width": 32,
+        "height": 24,
+        "offset": 1212480,
+        "length": 2304,
+        "stride": 64
+      },
+      {
+        "species": "guppy",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 0,
+        "width": 32,
+        "height": 24,
+        "offset": 1214784,
+        "length": 2304,
+        "stride": 64
+      },
+      {
+        "species": "guppy",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 1,
+        "width": 32,
+        "height": 24,
+        "offset": 1217088,
+        "length": 2304,
+        "stride": 64
+      },
+      {
+        "species": "guppy",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 2,
+        "width": 32,
+        "height": 24,
+        "offset": 1219392,
+        "length": 2304,
+        "stride": 64
+      },
+      {
+        "species": "guppy",
+        "size": 1,
+        "direction": 1,
+        "frame": 0,
+        "width": 51,
+        "height": 38,
+        "offset": 1221696,
+        "length": 5814,
+        "stride": 102
+      },
+      {
+        "species": "guppy",
+        "size": 1,
+        "direction": 1,
+        "frame": 1,
+        "width": 51,
+        "height": 38,
+        "offset": 1227510,
+        "length": 5814,
+        "stride": 102
+      },
+      {
+        "species": "guppy",
+        "size": 1,
+        "direction": 1,
+        "frame": 2,
+        "width": 51,
+        "height": 38,
+        "offset": 1233324,
+        "length": 5814,
+        "stride": 102
+      },
+      {
+        "species": "guppy",
+        "size": 1,
+        "direction": -1,
+        "frame": 0,
+        "width": 51,
+        "height": 38,
+        "offset": 1239138,
+        "length": 5814,
+        "stride": 102
+      },
+      {
+        "species": "guppy",
+        "size": 1,
+        "direction": -1,
+        "frame": 1,
+        "width": 51,
+        "height": 38,
+        "offset": 1244952,
+        "length": 5814,
+        "stride": 102
+      },
+      {
+        "species": "guppy",
+        "size": 1,
+        "direction": -1,
+        "frame": 2,
+        "width": 51,
+        "height": 38,
+        "offset": 1250766,
+        "length": 5814,
+        "stride": 102
+      },
+      {
+        "species": "guppy",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 0,
+        "width": 77,
+        "height": 58,
+        "offset": 1256580,
+        "length": 13398,
+        "stride": 154
+      },
+      {
+        "species": "guppy",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 1,
+        "width": 77,
+        "height": 58,
+        "offset": 1269978,
+        "length": 13398,
+        "stride": 154
+      },
+      {
+        "species": "guppy",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 2,
+        "width": 77,
+        "height": 58,
+        "offset": 1283376,
+        "length": 13398,
+        "stride": 154
+      },
+      {
+        "species": "guppy",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 0,
+        "width": 77,
+        "height": 58,
+        "offset": 1296774,
+        "length": 13398,
+        "stride": 154
+      },
+      {
+        "species": "guppy",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 1,
+        "width": 77,
+        "height": 58,
+        "offset": 1310172,
+        "length": 13398,
+        "stride": 154
+      },
+      {
+        "species": "guppy",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 2,
+        "width": 77,
+        "height": 58,
+        "offset": 1323570,
+        "length": 13398,
+        "stride": 154
+      },
+      {
+        "species": "crab",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 0,
+        "width": 30,
+        "height": 23,
+        "offset": 1336968,
+        "length": 2070,
+        "stride": 60
+      },
+      {
+        "species": "crab",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 1,
+        "width": 30,
+        "height": 23,
+        "offset": 1339038,
+        "length": 2070,
+        "stride": 60
+      },
+      {
+        "species": "crab",
+        "size": 0.625,
+        "direction": 1,
+        "frame": 2,
+        "width": 30,
+        "height": 23,
+        "offset": 1341108,
+        "length": 2070,
+        "stride": 60
+      },
+      {
+        "species": "crab",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 0,
+        "width": 30,
+        "height": 23,
+        "offset": 1343178,
+        "length": 2070,
+        "stride": 60
+      },
+      {
+        "species": "crab",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 1,
+        "width": 30,
+        "height": 23,
+        "offset": 1345248,
+        "length": 2070,
+        "stride": 60
+      },
+      {
+        "species": "crab",
+        "size": 0.625,
+        "direction": -1,
+        "frame": 2,
+        "width": 30,
+        "height": 23,
+        "offset": 1347318,
+        "length": 2070,
+        "stride": 60
+      },
+      {
+        "species": "crab",
+        "size": 1,
+        "direction": 1,
+        "frame": 0,
+        "width": 48,
+        "height": 36,
+        "offset": 1349388,
+        "length": 5184,
+        "stride": 96
+      },
+      {
+        "species": "crab",
+        "size": 1,
+        "direction": 1,
+        "frame": 1,
+        "width": 48,
+        "height": 36,
+        "offset": 1354572,
+        "length": 5184,
+        "stride": 96
+      },
+      {
+        "species": "crab",
+        "size": 1,
+        "direction": 1,
+        "frame": 2,
+        "width": 48,
+        "height": 36,
+        "offset": 1359756,
+        "length": 5184,
+        "stride": 96
+      },
+      {
+        "species": "crab",
+        "size": 1,
+        "direction": -1,
+        "frame": 0,
+        "width": 48,
+        "height": 36,
+        "offset": 1364940,
+        "length": 5184,
+        "stride": 96
+      },
+      {
+        "species": "crab",
+        "size": 1,
+        "direction": -1,
+        "frame": 1,
+        "width": 48,
+        "height": 36,
+        "offset": 1370124,
+        "length": 5184,
+        "stride": 96
+      },
+      {
+        "species": "crab",
+        "size": 1,
+        "direction": -1,
+        "frame": 2,
+        "width": 48,
+        "height": 36,
+        "offset": 1375308,
+        "length": 5184,
+        "stride": 96
+      },
+      {
+        "species": "crab",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 0,
+        "width": 72,
+        "height": 54,
+        "offset": 1380492,
+        "length": 11664,
+        "stride": 144
+      },
+      {
+        "species": "crab",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 1,
+        "width": 72,
+        "height": 54,
+        "offset": 1392156,
+        "length": 11664,
+        "stride": 144
+      },
+      {
+        "species": "crab",
+        "size": 1.5,
+        "direction": 1,
+        "frame": 2,
+        "width": 72,
+        "height": 54,
+        "offset": 1403820,
+        "length": 11664,
+        "stride": 144
+      },
+      {
+        "species": "crab",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 0,
+        "width": 72,
+        "height": 54,
+        "offset": 1415484,
+        "length": 11664,
+        "stride": 144
+      },
+      {
+        "species": "crab",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 1,
+        "width": 72,
+        "height": 54,
+        "offset": 1427148,
+        "length": 11664,
+        "stride": 144
+      },
+      {
+        "species": "crab",
+        "size": 1.5,
+        "direction": -1,
+        "frame": 2,
+        "width": 72,
+        "height": 54,
+        "offset": 1438812,
+        "length": 11664,
+        "stride": 144
+      }
+    ]
+  },
+  "font": {
+    "bitOrder": "LSB-first, contiguous pixels per glyph",
+    "glyphs": [
+      {
+        "char": "0",
+        "codepoint": 48,
+        "width": 6,
+        "height": 12,
+        "offset": 0,
+        "length": 9
+      },
+      {
+        "char": "1",
+        "codepoint": 49,
+        "width": 6,
+        "height": 12,
+        "offset": 9,
+        "length": 9
+      },
+      {
+        "char": "2",
+        "codepoint": 50,
+        "width": 6,
+        "height": 12,
+        "offset": 18,
+        "length": 9
+      },
+      {
+        "char": "3",
+        "codepoint": 51,
+        "width": 6,
+        "height": 12,
+        "offset": 27,
+        "length": 9
+      },
+      {
+        "char": "4",
+        "codepoint": 52,
+        "width": 6,
+        "height": 12,
+        "offset": 36,
+        "length": 9
+      },
+      {
+        "char": "5",
+        "codepoint": 53,
+        "width": 6,
+        "height": 12,
+        "offset": 45,
+        "length": 9
+      },
+      {
+        "char": "6",
+        "codepoint": 54,
+        "width": 6,
+        "height": 12,
+        "offset": 54,
+        "length": 9
+      },
+      {
+        "char": "7",
+        "codepoint": 55,
+        "width": 6,
+        "height": 12,
+        "offset": 63,
+        "length": 9
+      },
+      {
+        "char": "8",
+        "codepoint": 56,
+        "width": 6,
+        "height": 12,
+        "offset": 72,
+        "length": 9
+      },
+      {
+        "char": "9",
+        "codepoint": 57,
+        "width": 6,
+        "height": 12,
+        "offset": 81,
+        "length": 9
+      },
+      {
+        "char": " ",
+        "codepoint": 32,
+        "width": 6,
+        "height": 12,
+        "offset": 90,
+        "length": 9
+      },
+      {
+        "char": "!",
+        "codepoint": 33,
+        "width": 6,
+        "height": 12,
+        "offset": 99,
+        "length": 9
+      },
+      {
+        "char": "\"",
+        "codepoint": 34,
+        "width": 6,
+        "height": 12,
+        "offset": 108,
+        "length": 9
+      },
+      {
+        "char": "#",
+        "codepoint": 35,
+        "width": 6,
+        "height": 12,
+        "offset": 117,
+        "length": 9
+      },
+      {
+        "char": "$",
+        "codepoint": 36,
+        "width": 6,
+        "height": 12,
+        "offset": 126,
+        "length": 9
+      },
+      {
+        "char": "%",
+        "codepoint": 37,
+        "width": 6,
+        "height": 12,
+        "offset": 135,
+        "length": 9
+      },
+      {
+        "char": "&",
+        "codepoint": 38,
+        "width": 6,
+        "height": 12,
+        "offset": 144,
+        "length": 9
+      },
+      {
+        "char": "'",
+        "codepoint": 39,
+        "width": 6,
+        "height": 12,
+        "offset": 153,
+        "length": 9
+      },
+      {
+        "char": "(",
+        "codepoint": 40,
+        "width": 6,
+        "height": 12,
+        "offset": 162,
+        "length": 9
+      },
+      {
+        "char": ")",
+        "codepoint": 41,
+        "width": 6,
+        "height": 12,
+        "offset": 171,
+        "length": 9
+      },
+      {
+        "char": "*",
+        "codepoint": 42,
+        "width": 6,
+        "height": 12,
+        "offset": 180,
+        "length": 9
+      },
+      {
+        "char": "+",
+        "codepoint": 43,
+        "width": 6,
+        "height": 12,
+        "offset": 189,
+        "length": 9
+      },
+      {
+        "char": ",",
+        "codepoint": 44,
+        "width": 6,
+        "height": 12,
+        "offset": 198,
+        "length": 9
+      },
+      {
+        "char": "-",
+        "codepoint": 45,
+        "width": 6,
+        "height": 12,
+        "offset": 207,
+        "length": 9
+      },
+      {
+        "char": ".",
+        "codepoint": 46,
+        "width": 6,
+        "height": 12,
+        "offset": 216,
+        "length": 9
+      },
+      {
+        "char": "/",
+        "codepoint": 47,
+        "width": 6,
+        "height": 12,
+        "offset": 225,
+        "length": 9
+      },
+      {
+        "char": ":",
+        "codepoint": 58,
+        "width": 6,
+        "height": 12,
+        "offset": 234,
+        "length": 9
+      },
+      {
+        "char": ";",
+        "codepoint": 59,
+        "width": 6,
+        "height": 12,
+        "offset": 243,
+        "length": 9
+      },
+      {
+        "char": "<",
+        "codepoint": 60,
+        "width": 6,
+        "height": 12,
+        "offset": 252,
+        "length": 9
+      },
+      {
+        "char": "=",
+        "codepoint": 61,
+        "width": 6,
+        "height": 12,
+        "offset": 261,
+        "length": 9
+      },
+      {
+        "char": ">",
+        "codepoint": 62,
+        "width": 6,
+        "height": 12,
+        "offset": 270,
+        "length": 9
+      },
+      {
+        "char": "?",
+        "codepoint": 63,
+        "width": 6,
+        "height": 12,
+        "offset": 279,
+        "length": 9
+      },
+      {
+        "char": "@",
+        "codepoint": 64,
+        "width": 6,
+        "height": 12,
+        "offset": 288,
+        "length": 9
+      },
+      {
+        "char": "A",
+        "codepoint": 65,
+        "width": 6,
+        "height": 12,
+        "offset": 297,
+        "length": 9
+      },
+      {
+        "char": "B",
+        "codepoint": 66,
+        "width": 6,
+        "height": 12,
+        "offset": 306,
+        "length": 9
+      },
+      {
+        "char": "C",
+        "codepoint": 67,
+        "width": 6,
+        "height": 12,
+        "offset": 315,
+        "length": 9
+      },
+      {
+        "char": "D",
+        "codepoint": 68,
+        "width": 6,
+        "height": 12,
+        "offset": 324,
+        "length": 9
+      },
+      {
+        "char": "E",
+        "codepoint": 69,
+        "width": 6,
+        "height": 12,
+        "offset": 333,
+        "length": 9
+      },
+      {
+        "char": "F",
+        "codepoint": 70,
+        "width": 6,
+        "height": 12,
+        "offset": 342,
+        "length": 9
+      },
+      {
+        "char": "G",
+        "codepoint": 71,
+        "width": 6,
+        "height": 12,
+        "offset": 351,
+        "length": 9
+      },
+      {
+        "char": "H",
+        "codepoint": 72,
+        "width": 6,
+        "height": 12,
+        "offset": 360,
+        "length": 9
+      },
+      {
+        "char": "I",
+        "codepoint": 73,
+        "width": 6,
+        "height": 12,
+        "offset": 369,
+        "length": 9
+      },
+      {
+        "char": "J",
+        "codepoint": 74,
+        "width": 6,
+        "height": 12,
+        "offset": 378,
+        "length": 9
+      },
+      {
+        "char": "K",
+        "codepoint": 75,
+        "width": 6,
+        "height": 12,
+        "offset": 387,
+        "length": 9
+      },
+      {
+        "char": "L",
+        "codepoint": 76,
+        "width": 6,
+        "height": 12,
+        "offset": 396,
+        "length": 9
+      },
+      {
+        "char": "M",
+        "codepoint": 77,
+        "width": 6,
+        "height": 12,
+        "offset": 405,
+        "length": 9
+      },
+      {
+        "char": "N",
+        "codepoint": 78,
+        "width": 6,
+        "height": 12,
+        "offset": 414,
+        "length": 9
+      },
+      {
+        "char": "O",
+        "codepoint": 79,
+        "width": 6,
+        "height": 12,
+        "offset": 423,
+        "length": 9
+      },
+      {
+        "char": "P",
+        "codepoint": 80,
+        "width": 6,
+        "height": 12,
+        "offset": 432,
+        "length": 9
+      },
+      {
+        "char": "Q",
+        "codepoint": 81,
+        "width": 6,
+        "height": 12,
+        "offset": 441,
+        "length": 9
+      },
+      {
+        "char": "R",
+        "codepoint": 82,
+        "width": 6,
+        "height": 12,
+        "offset": 450,
+        "length": 9
+      },
+      {
+        "char": "S",
+        "codepoint": 83,
+        "width": 6,
+        "height": 12,
+        "offset": 459,
+        "length": 9
+      },
+      {
+        "char": "T",
+        "codepoint": 84,
+        "width": 6,
+        "height": 12,
+        "offset": 468,
+        "length": 9
+      },
+      {
+        "char": "U",
+        "codepoint": 85,
+        "width": 6,
+        "height": 12,
+        "offset": 477,
+        "length": 9
+      },
+      {
+        "char": "V",
+        "codepoint": 86,
+        "width": 6,
+        "height": 12,
+        "offset": 486,
+        "length": 9
+      },
+      {
+        "char": "W",
+        "codepoint": 87,
+        "width": 6,
+        "height": 12,
+        "offset": 495,
+        "length": 9
+      },
+      {
+        "char": "X",
+        "codepoint": 88,
+        "width": 6,
+        "height": 12,
+        "offset": 504,
+        "length": 9
+      },
+      {
+        "char": "Y",
+        "codepoint": 89,
+        "width": 6,
+        "height": 12,
+        "offset": 513,
+        "length": 9
+      },
+      {
+        "char": "Z",
+        "codepoint": 90,
+        "width": 6,
+        "height": 12,
+        "offset": 522,
+        "length": 9
+      },
+      {
+        "char": "[",
+        "codepoint": 91,
+        "width": 6,
+        "height": 12,
+        "offset": 531,
+        "length": 9
+      },
+      {
+        "char": "\\",
+        "codepoint": 92,
+        "width": 6,
+        "height": 12,
+        "offset": 540,
+        "length": 9
+      },
+      {
+        "char": "]",
+        "codepoint": 93,
+        "width": 6,
+        "height": 12,
+        "offset": 549,
+        "length": 9
+      },
+      {
+        "char": "^",
+        "codepoint": 94,
+        "width": 6,
+        "height": 12,
+        "offset": 558,
+        "length": 9
+      },
+      {
+        "char": "_",
+        "codepoint": 95,
+        "width": 6,
+        "height": 12,
+        "offset": 567,
+        "length": 9
+      },
+      {
+        "char": "`",
+        "codepoint": 96,
+        "width": 6,
+        "height": 12,
+        "offset": 576,
+        "length": 9
+      },
+      {
+        "char": "a",
+        "codepoint": 97,
+        "width": 6,
+        "height": 12,
+        "offset": 585,
+        "length": 9
+      },
+      {
+        "char": "b",
+        "codepoint": 98,
+        "width": 6,
+        "height": 12,
+        "offset": 594,
+        "length": 9
+      },
+      {
+        "char": "c",
+        "codepoint": 99,
+        "width": 6,
+        "height": 12,
+        "offset": 603,
+        "length": 9
+      },
+      {
+        "char": "d",
+        "codepoint": 100,
+        "width": 6,
+        "height": 12,
+        "offset": 612,
+        "length": 9
+      },
+      {
+        "char": "e",
+        "codepoint": 101,
+        "width": 6,
+        "height": 12,
+        "offset": 621,
+        "length": 9
+      },
+      {
+        "char": "f",
+        "codepoint": 102,
+        "width": 6,
+        "height": 12,
+        "offset": 630,
+        "length": 9
+      },
+      {
+        "char": "g",
+        "codepoint": 103,
+        "width": 6,
+        "height": 12,
+        "offset": 639,
+        "length": 9
+      },
+      {
+        "char": "h",
+        "codepoint": 104,
+        "width": 6,
+        "height": 12,
+        "offset": 648,
+        "length": 9
+      },
+      {
+        "char": "i",
+        "codepoint": 105,
+        "width": 6,
+        "height": 12,
+        "offset": 657,
+        "length": 9
+      },
+      {
+        "char": "j",
+        "codepoint": 106,
+        "width": 6,
+        "height": 12,
+        "offset": 666,
+        "length": 9
+      },
+      {
+        "char": "k",
+        "codepoint": 107,
+        "width": 6,
+        "height": 12,
+        "offset": 675,
+        "length": 9
+      },
+      {
+        "char": "l",
+        "codepoint": 108,
+        "width": 6,
+        "height": 12,
+        "offset": 684,
+        "length": 9
+      },
+      {
+        "char": "m",
+        "codepoint": 109,
+        "width": 6,
+        "height": 12,
+        "offset": 693,
+        "length": 9
+      },
+      {
+        "char": "n",
+        "codepoint": 110,
+        "width": 6,
+        "height": 12,
+        "offset": 702,
+        "length": 9
+      },
+      {
+        "char": "o",
+        "codepoint": 111,
+        "width": 6,
+        "height": 12,
+        "offset": 711,
+        "length": 9
+      },
+      {
+        "char": "p",
+        "codepoint": 112,
+        "width": 6,
+        "height": 12,
+        "offset": 720,
+        "length": 9
+      },
+      {
+        "char": "q",
+        "codepoint": 113,
+        "width": 6,
+        "height": 12,
+        "offset": 729,
+        "length": 9
+      },
+      {
+        "char": "r",
+        "codepoint": 114,
+        "width": 6,
+        "height": 12,
+        "offset": 738,
+        "length": 9
+      },
+      {
+        "char": "s",
+        "codepoint": 115,
+        "width": 6,
+        "height": 12,
+        "offset": 747,
+        "length": 9
+      },
+      {
+        "char": "t",
+        "codepoint": 116,
+        "width": 6,
+        "height": 12,
+        "offset": 756,
+        "length": 9
+      },
+      {
+        "char": "u",
+        "codepoint": 117,
+        "width": 6,
+        "height": 12,
+        "offset": 765,
+        "length": 9
+      },
+      {
+        "char": "v",
+        "codepoint": 118,
+        "width": 6,
+        "height": 12,
+        "offset": 774,
+        "length": 9
+      },
+      {
+        "char": "w",
+        "codepoint": 119,
+        "width": 6,
+        "height": 12,
+        "offset": 783,
+        "length": 9
+      },
+      {
+        "char": "x",
+        "codepoint": 120,
+        "width": 6,
+        "height": 12,
+        "offset": 792,
+        "length": 9
+      },
+      {
+        "char": "y",
+        "codepoint": 121,
+        "width": 6,
+        "height": 12,
+        "offset": 801,
+        "length": 9
+      },
+      {
+        "char": "z",
+        "codepoint": 122,
+        "width": 6,
+        "height": 12,
+        "offset": 810,
+        "length": 9
+      },
+      {
+        "char": "{",
+        "codepoint": 123,
+        "width": 6,
+        "height": 12,
+        "offset": 819,
+        "length": 9
+      },
+      {
+        "char": "|",
+        "codepoint": 124,
+        "width": 6,
+        "height": 12,
+        "offset": 828,
+        "length": 9
+      },
+      {
+        "char": "}",
+        "codepoint": 125,
+        "width": 6,
+        "height": 12,
+        "offset": 837,
+        "length": 9
+      },
+      {
+        "char": "~",
+        "codepoint": 126,
+        "width": 6,
+        "height": 12,
+        "offset": 846,
+        "length": 9
+      },
+      {
+        "char": "·",
+        "codepoint": 183,
+        "width": 12,
+        "height": 12,
+        "offset": 855,
+        "length": 18
+      },
+      {
+        "char": "一",
+        "codepoint": 19968,
+        "width": 12,
+        "height": 12,
+        "offset": 873,
+        "length": 18
+      },
+      {
+        "char": "三",
+        "codepoint": 19977,
+        "width": 12,
+        "height": 12,
+        "offset": 891,
+        "length": 18
+      },
+      {
+        "char": "上",
+        "codepoint": 19978,
+        "width": 12,
+        "height": 12,
+        "offset": 909,
+        "length": 18
+      },
+      {
+        "char": "下",
+        "codepoint": 19979,
+        "width": 12,
+        "height": 12,
+        "offset": 927,
+        "length": 18
+      },
+      {
+        "char": "二",
+        "codepoint": 20108,
+        "width": 12,
+        "height": 12,
+        "offset": 945,
+        "length": 18
+      },
+      {
+        "char": "五",
+        "codepoint": 20116,
+        "width": 12,
+        "height": 12,
+        "offset": 963,
+        "length": 18
+      },
+      {
+        "char": "今",
+        "codepoint": 20170,
+        "width": 12,
+        "height": 12,
+        "offset": 981,
+        "length": 18
+      },
+      {
+        "char": "们",
+        "codepoint": 20204,
+        "width": 12,
+        "height": 12,
+        "offset": 999,
+        "length": 18
+      },
+      {
+        "char": "份",
+        "codepoint": 20221,
+        "width": 12,
+        "height": 12,
+        "offset": 1017,
+        "length": 18
+      },
+      {
+        "char": "住",
+        "codepoint": 20303,
+        "width": 12,
+        "height": 12,
+        "offset": 1035,
+        "length": 18
+      },
+      {
+        "char": "儿",
+        "codepoint": 20799,
+        "width": 12,
+        "height": 12,
+        "offset": 1053,
+        "length": 18
+      },
+      {
+        "char": "先",
+        "codepoint": 20808,
+        "width": 12,
+        "height": 12,
+        "offset": 1071,
+        "length": 18
+      },
+      {
+        "char": "入",
+        "codepoint": 20837,
+        "width": 12,
+        "height": 12,
+        "offset": 1089,
+        "length": 18
+      },
+      {
+        "char": "六",
+        "codepoint": 20845,
+        "width": 12,
+        "height": 12,
+        "offset": 1107,
+        "length": 18
+      },
+      {
+        "char": "兰",
+        "codepoint": 20848,
+        "width": 12,
+        "height": 12,
+        "offset": 1125,
+        "length": 18
+      },
+      {
+        "char": "再",
+        "codepoint": 20877,
+        "width": 12,
+        "height": 12,
+        "offset": 1143,
+        "length": 18
+      },
+      {
+        "char": "净",
+        "codepoint": 20928,
+        "width": 12,
+        "height": 12,
+        "offset": 1161,
+        "length": 18
+      },
+      {
+        "char": "切",
+        "codepoint": 20999,
+        "width": 12,
+        "height": 12,
+        "offset": 1179,
+        "length": 18
+      },
+      {
+        "char": "区",
+        "codepoint": 21306,
+        "width": 12,
+        "height": 12,
+        "offset": 1197,
+        "length": 18
+      },
+      {
+        "char": "友",
+        "codepoint": 21451,
+        "width": 12,
+        "height": 12,
+        "offset": 1215,
+        "length": 18
+      },
+      {
+        "char": "吃",
+        "codepoint": 21507,
+        "width": 12,
+        "height": 12,
+        "offset": 1233,
+        "length": 18
+      },
+      {
+        "char": "后",
+        "codepoint": 21518,
+        "width": 12,
+        "height": 12,
+        "offset": 1251,
+        "length": 18
+      },
+      {
+        "char": "吧",
+        "codepoint": 21543,
+        "width": 12,
+        "height": 12,
+        "offset": 1269,
+        "length": 18
+      },
+      {
+        "char": "周",
+        "codepoint": 21608,
+        "width": 12,
+        "height": 12,
+        "offset": 1287,
+        "length": 18
+      },
+      {
+        "char": "啦",
+        "codepoint": 21862,
+        "width": 12,
+        "height": 12,
+        "offset": 1305,
+        "length": 18
+      },
+      {
+        "char": "喂",
+        "codepoint": 21890,
+        "width": 12,
+        "height": 12,
+        "offset": 1323,
+        "length": 18
+      },
+      {
+        "char": "四",
+        "codepoint": 22235,
+        "width": 12,
+        "height": 12,
+        "offset": 1341,
+        "length": 18
+      },
+      {
+        "char": "回",
+        "codepoint": 22238,
+        "width": 12,
+        "height": 12,
+        "offset": 1359,
+        "length": 18
+      },
+      {
+        "char": "圆",
+        "codepoint": 22278,
+        "width": 12,
+        "height": 12,
+        "offset": 1377,
+        "length": 18
+      },
+      {
+        "char": "大",
+        "codepoint": 22823,
+        "width": 12,
+        "height": 12,
+        "offset": 1395,
+        "length": 18
+      },
+      {
+        "char": "天",
+        "codepoint": 22825,
+        "width": 12,
+        "height": 12,
+        "offset": 1413,
+        "length": 18
+      },
+      {
+        "char": "它",
+        "codepoint": 23427,
+        "width": 12,
+        "height": 12,
+        "offset": 1431,
+        "length": 18
+      },
+      {
+        "char": "完",
+        "codepoint": 23436,
+        "width": 12,
+        "height": 12,
+        "offset": 1449,
+        "length": 18
+      },
+      {
+        "char": "定",
+        "codepoint": 23450,
+        "width": 12,
+        "height": 12,
+        "offset": 1467,
+        "length": 18
+      },
+      {
+        "char": "寿",
+        "codepoint": 23551,
+        "width": 12,
+        "height": 12,
+        "offset": 1485,
+        "length": 18
+      },
+      {
+        "char": "小",
+        "codepoint": 23567,
+        "width": 12,
+        "height": 12,
+        "offset": 1503,
+        "length": 18
+      },
+      {
+        "char": "就",
+        "codepoint": 23601,
+        "width": 12,
+        "height": 12,
+        "offset": 1521,
+        "length": 18
+      },
+      {
+        "char": "尾",
+        "codepoint": 23614,
+        "width": 12,
+        "height": 12,
+        "offset": 1539,
+        "length": 18
+      },
+      {
+        "char": "已",
+        "codepoint": 24050,
+        "width": 12,
+        "height": 12,
+        "offset": 1557,
+        "length": 18
+      },
+      {
+        "char": "帽",
+        "codepoint": 24125,
+        "width": 12,
+        "height": 12,
+        "offset": 1575,
+        "length": 18
+      },
+      {
+        "char": "干",
+        "codepoint": 24178,
+        "width": 12,
+        "height": 12,
+        "offset": 1593,
+        "length": 18
+      },
+      {
+        "char": "幼",
+        "codepoint": 24188,
+        "width": 12,
+        "height": 12,
+        "offset": 1611,
+        "length": 18
+      },
+      {
+        "char": "开",
+        "codepoint": 24320,
+        "width": 12,
+        "height": 12,
+        "offset": 1629,
+        "length": 18
+      },
+      {
+        "char": "很",
+        "codepoint": 24456,
+        "width": 12,
+        "height": 12,
+        "offset": 1647,
+        "length": 18
+      },
+      {
+        "char": "慢",
+        "codepoint": 24930,
+        "width": 12,
+        "height": 12,
+        "offset": 1665,
+        "length": 18
+      },
+      {
+        "char": "成",
+        "codepoint": 25104,
+        "width": 12,
+        "height": 12,
+        "offset": 1683,
+        "length": 18
+      },
+      {
+        "char": "择",
+        "codepoint": 25321,
+        "width": 12,
+        "height": 12,
+        "offset": 1701,
+        "length": 18
+      },
+      {
+        "char": "按",
+        "codepoint": 25353,
+        "width": 12,
+        "height": 12,
+        "offset": 1719,
+        "length": 18
+      },
+      {
+        "char": "换",
+        "codepoint": 25442,
+        "width": 12,
+        "height": 12,
+        "offset": 1737,
+        "length": 18
+      },
+      {
+        "char": "擦",
+        "codepoint": 25830,
+        "width": 12,
+        "height": 12,
+        "offset": 1755,
+        "length": 18
+      },
+      {
+        "char": "放",
+        "codepoint": 25918,
+        "width": 12,
+        "height": 12,
+        "offset": 1773,
+        "length": 18
+      },
+      {
+        "char": "料",
+        "codepoint": 26009,
+        "width": 12,
+        "height": 12,
+        "offset": 1791,
+        "length": 18
+      },
+      {
+        "char": "新",
+        "codepoint": 26032,
+        "width": 12,
+        "height": 12,
+        "offset": 1809,
+        "length": 18
+      },
+      {
+        "char": "无",
+        "codepoint": 26080,
+        "width": 12,
+        "height": 12,
+        "offset": 1827,
+        "length": 18
+      },
+      {
+        "char": "日",
+        "codepoint": 26085,
+        "width": 12,
+        "height": 12,
+        "offset": 1845,
+        "length": 18
+      },
+      {
+        "char": "明",
+        "codepoint": 26126,
+        "width": 12,
+        "height": 12,
+        "offset": 1863,
+        "length": 18
+      },
+      {
+        "char": "有",
+        "codepoint": 26377,
+        "width": 12,
+        "height": 12,
+        "offset": 1881,
+        "length": 18
+      },
+      {
+        "char": "朋",
+        "codepoint": 26379,
+        "width": 12,
+        "height": 12,
+        "offset": 1899,
+        "length": 18
+      },
+      {
+        "char": "条",
+        "codepoint": 26465,
+        "width": 12,
+        "height": 12,
+        "offset": 1917,
+        "length": 18
+      },
+      {
+        "char": "步",
+        "codepoint": 27493,
+        "width": 12,
+        "height": 12,
+        "offset": 1935,
+        "length": 18
+      },
+      {
+        "char": "水",
+        "codepoint": 27700,
+        "width": 12,
+        "height": 12,
+        "offset": 1953,
+        "length": 18
+      },
+      {
+        "char": "满",
+        "codepoint": 28385,
+        "width": 12,
+        "height": 12,
+        "offset": 1971,
+        "length": 18
+      },
+      {
+        "char": "照",
+        "codepoint": 29031,
+        "width": 12,
+        "height": 12,
+        "offset": 1989,
+        "length": 18
+      },
+      {
+        "char": "琉",
+        "codepoint": 29705,
+        "width": 12,
+        "height": 12,
+        "offset": 2007,
+        "length": 18
+      },
+      {
+        "char": "的",
+        "codepoint": 30340,
+        "width": 12,
+        "height": 12,
+        "offset": 2025,
+        "length": 18
+      },
+      {
+        "char": "看",
+        "codepoint": 30475,
+        "width": 12,
+        "height": 12,
+        "offset": 2043,
+        "length": 18
+      },
+      {
+        "char": "确",
+        "codepoint": 30830,
+        "width": 12,
+        "height": 12,
+        "offset": 2061,
+        "length": 18
+      },
+      {
+        "char": "章",
+        "codepoint": 31456,
+        "width": 12,
+        "height": 12,
+        "offset": 2079,
+        "length": 18
+      },
+      {
+        "char": "等",
+        "codepoint": 31561,
+        "width": 12,
+        "height": 12,
+        "offset": 2097,
+        "length": 18
+      },
+      {
+        "char": "累",
+        "codepoint": 32047,
+        "width": 12,
+        "height": 12,
+        "offset": 2115,
+        "length": 18
+      },
+      {
+        "char": "红",
+        "codepoint": 32418,
+        "width": 12,
+        "height": 12,
+        "offset": 2133,
+        "length": 18
+      },
+      {
+        "char": "经",
+        "codepoint": 32463,
+        "width": 12,
+        "height": 12,
+        "offset": 2151,
+        "length": 18
+      },
+      {
+        "char": "缸",
+        "codepoint": 32568,
+        "width": 12,
+        "height": 12,
+        "offset": 2169,
+        "length": 18
+      },
+      {
+        "char": "背",
+        "codepoint": 32972,
+        "width": 12,
+        "height": 12,
+        "offset": 2187,
+        "length": 18
+      },
+      {
+        "char": "能",
+        "codepoint": 33021,
+        "width": 12,
+        "height": 12,
+        "offset": 2205,
+        "length": 18
+      },
+      {
+        "char": "藻",
+        "codepoint": 34299,
+        "width": 12,
+        "height": 12,
+        "offset": 2223,
+        "length": 18
+      },
+      {
+        "char": "计",
+        "codepoint": 35745,
+        "width": 12,
+        "height": 12,
+        "offset": 2241,
+        "length": 18
+      },
+      {
+        "char": "质",
+        "codepoint": 36136,
+        "width": 12,
+        "height": 12,
+        "offset": 2259,
+        "length": 18
+      },
+      {
+        "char": "返",
+        "codepoint": 36820,
+        "width": 12,
+        "height": 12,
+        "offset": 2277,
+        "length": 18
+      },
+      {
+        "char": "这",
+        "codepoint": 36825,
+        "width": 12,
+        "height": 12,
+        "offset": 2295,
+        "length": 18
+      },
+      {
+        "char": "选",
+        "codepoint": 36873,
+        "width": 12,
+        "height": 12,
+        "offset": 2313,
+        "length": 18
+      },
+      {
+        "char": "金",
+        "codepoint": 37329,
+        "width": 12,
+        "height": 12,
+        "offset": 2331,
+        "length": 18
+      },
+      {
+        "char": "长",
+        "codepoint": 38271,
+        "width": 12,
+        "height": 12,
+        "offset": 2349,
+        "length": 18
+      },
+      {
+        "char": "顶",
+        "codepoint": 39030,
+        "width": 12,
+        "height": 12,
+        "offset": 2367,
+        "length": 18
+      },
+      {
+        "char": "飘",
+        "codepoint": 39128,
+        "width": 12,
+        "height": 12,
+        "offset": 2385,
+        "length": 18
+      },
+      {
+        "char": "食",
+        "codepoint": 39135,
+        "width": 12,
+        "height": 12,
+        "offset": 2403,
+        "length": 18
+      },
+      {
+        "char": "饭",
+        "codepoint": 39277,
+        "width": 12,
+        "height": 12,
+        "offset": 2421,
+        "length": 18
+      },
+      {
+        "char": "饱",
+        "codepoint": 39281,
+        "width": 12,
+        "height": 12,
+        "offset": 2439,
+        "length": 18
+      },
+      {
+        "char": "高",
+        "codepoint": 39640,
+        "width": 12,
+        "height": 12,
+        "offset": 2457,
+        "length": 18
+      },
+      {
+        "char": "鱼",
+        "codepoint": 40060,
+        "width": 12,
+        "height": 12,
+        "offset": 2475,
+        "length": 18
+      },
+      {
+        "char": "鳍",
+        "codepoint": 40141,
+        "width": 12,
+        "height": 12,
+        "offset": 2493,
+        "length": 18
+      },
+      {
+        "char": "鹤",
+        "codepoint": 40548,
+        "width": 12,
+        "height": 12,
+        "offset": 2511,
+        "length": 18
+      },
+      {
+        "char": "！",
+        "codepoint": 65281,
+        "width": 12,
+        "height": 12,
+        "offset": 2529,
+        "length": 18
+      },
+      {
+        "char": "，",
+        "codepoint": 65292,
+        "width": 12,
+        "height": 12,
+        "offset": 2547,
+        "length": 18
+      },
+      {
+        "char": "：",
+        "codepoint": 65306,
+        "width": 12,
+        "height": 12,
+        "offset": 2565,
+        "length": 18
+      },
+      {
+        "char": "单",
+        "codepoint": 21333,
+        "width": 12,
+        "height": 12,
+        "offset": 2583,
+        "length": 18
+      },
+      {
+        "char": "墨",
+        "codepoint": 22696,
+        "width": 12,
+        "height": 12,
+        "offset": 2601,
+        "length": 18
+      },
+      {
+        "char": "文",
+        "codepoint": 25991,
+        "width": 12,
+        "height": 12,
+        "offset": 2619,
+        "length": 18
+      },
+      {
+        "char": "朱",
+        "codepoint": 26417,
+        "width": 12,
+        "height": 12,
+        "offset": 2637,
+        "length": 18
+      },
+      {
+        "char": "珍",
+        "codepoint": 29645,
+        "width": 12,
+        "height": 12,
+        "offset": 2655,
+        "length": 18
+      },
+      {
+        "char": "珠",
+        "codepoint": 29664,
+        "width": 12,
+        "height": 12,
+        "offset": 2673,
+        "length": 18
+      },
+      {
+        "char": "睛",
+        "codepoint": 30555,
+        "width": 12,
+        "height": 12,
+        "offset": 2691,
+        "length": 18
+      },
+      {
+        "char": "色",
+        "codepoint": 33394,
+        "width": 12,
+        "height": 12,
+        "offset": 2709,
+        "length": 18
+      },
+      {
+        "char": "花",
+        "codepoint": 33457,
+        "width": 12,
+        "height": 12,
+        "offset": 2727,
+        "length": 18
+      },
+      {
+        "char": "身",
+        "codepoint": 36523,
+        "width": 12,
+        "height": 12,
+        "offset": 2745,
+        "length": 18
+      },
+      {
+        "char": "鳞",
+        "codepoint": 40158,
+        "width": 12,
+        "height": 12,
+        "offset": 2763,
+        "length": 18
+      },
+      {
+        "char": "黑",
+        "codepoint": 40657,
+        "width": 12,
+        "height": 12,
+        "offset": 2781,
+        "length": 18
+      },
+      {
+        "char": "龙",
+        "codepoint": 40857,
+        "width": 12,
+        "height": 12,
+        "offset": 2799,
+        "length": 18
+      },
+      {
+        "char": "伙",
+        "codepoint": 20249,
+        "width": 12,
+        "height": 12,
+        "offset": 2817,
+        "length": 18
+      },
+      {
+        "char": "伴",
+        "codepoint": 20276,
+        "width": 12,
+        "height": 12,
+        "offset": 2835,
+        "length": 18
+      },
+      {
+        "char": "孔",
+        "codepoint": 23380,
+        "width": 12,
+        "height": 12,
+        "offset": 2853,
+        "length": 18
+      },
+      {
+        "char": "底",
+        "codepoint": 24213,
+        "width": 12,
+        "height": 12,
+        "offset": 2871,
+        "length": 18
+      },
+      {
+        "char": "扇",
+        "codepoint": 25159,
+        "width": 12,
+        "height": 12,
+        "offset": 2889,
+        "length": 18
+      },
+      {
+        "char": "横",
+        "codepoint": 27178,
+        "width": 12,
+        "height": 12,
+        "offset": 2907,
+        "length": 18
+      },
+      {
+        "char": "沿",
+        "codepoint": 27839,
+        "width": 12,
+        "height": 12,
+        "offset": 2925,
+        "length": 18
+      },
+      {
+        "char": "爬",
+        "codepoint": 29228,
+        "width": 12,
+        "height": 12,
+        "offset": 2943,
+        "length": 18
+      },
+      {
+        "char": "着",
+        "codepoint": 30528,
+        "width": 12,
+        "height": 12,
+        "offset": 2961,
+        "length": 18
+      },
+      {
+        "char": "螃",
+        "codepoint": 34691,
+        "width": 12,
+        "height": 12,
+        "offset": 2979,
+        "length": 18
+      },
+      {
+        "char": "蟹",
+        "codepoint": 34809,
+        "width": 12,
+        "height": 12,
+        "offset": 2997,
+        "length": 18
+      },
+      {
+        "char": "行",
+        "codepoint": 34892,
+        "width": 12,
+        "height": 12,
+        "offset": 3015,
+        "length": 18
+      },
+      {
+        "char": "雀",
+        "codepoint": 38592,
+        "width": 12,
+        "height": 12,
+        "offset": 3033,
+        "length": 18
+      }
+    ]
+  }
+}

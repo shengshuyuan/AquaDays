@@ -1,0 +1,44 @@
+[
+  {
+    "species": "ryukin",
+    "x": 32,
+    "y": 60,
+    "width": 440,
+    "height": 387
+  },
+  {
+    "species": "ranchu",
+    "x": 571,
+    "y": 164,
+    "width": 386,
+    "height": 210
+  },
+  {
+    "species": "oranda",
+    "x": 1039,
+    "y": 94,
+    "width": 455,
+    "height": 339
+  },
+  {
+    "species": "moor",
+    "x": 33,
+    "y": 590,
+    "width": 437,
+    "height": 339
+  },
+  {
+    "species": "pearlscale",
+    "x": 579,
+    "y": 610,
+    "width": 354,
+    "height": 291
+  },
+  {
+    "species": "shubunkin",
+    "x": 1028,
+    "y": 625,
+    "width": 475,
+    "height": 249
+  }
+]

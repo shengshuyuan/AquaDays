@@ -1,0 +1,11 @@
+{
+  "backgroundBytes": 153600,
+  "nightBackgroundBytes": 153600,
+  "spriteBytes": 1450476,
+  "fontBitmapBytes": 3051,
+  "totalBitmapBytes": 1760727,
+  "glyphCount": 217,
+  "spriteFrames": 144,
+  "targetDisplayBufferBytes": 9600,
+  "note": "Flash asset sizes, not measured firmware heap or frame rate. Adult/juvenile/catalogue and mirrored fish are pre-baked; no runtime image scaling needed."
+}
