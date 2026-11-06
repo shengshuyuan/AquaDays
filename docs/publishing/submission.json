@@ -1,0 +1,8 @@
+{
+  "title_zh": "AquaDays · 一缸时光",
+  "title_en": "AquaDays — A Little Aquarium",
+  "description_zh": "把桌面变成一方悠闲的小鱼缸。七种鱼儿与缸底横行的螃蟹相伴，挑选喜欢的伙伴，喂食、擦缸，看幼鱼慢慢长大。水景随游戏时钟切换昼夜，轻柔气泡声与自动沉浸观赏，让每次短暂照料都成为放松片刻。封面由当前固件绘制代码在电脑上渲染，并非实机照片。",
+  "description_en": "A peaceful little aquarium for your desk. Choose from seven kinds of fish and a bottom-walking crab, feed your companions, wipe the glass, and watch young fish grow. Day and night follow the game clock, while gentle bubbles and automatic immersive viewing make each short visit a relaxing break. The cover is rendered on a computer using the current firmware drawing code, not photographed from a device.",
+  "source_url": "https://github.com/shengshuyuan/AquaDays",
+  "source_commit": "945fe7bd0ce48eb78562e2c24ce0f41fcfa91efb"
+}

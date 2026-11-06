@@ -1,0 +1,4 @@
+1. Install and power on to enter the aquarium. Play offline with no network setup. This version resets progress on restart; its clock starts from the firmware build time.
+2. Use Up/Down to select a home action and tap OK to perform it. Hold OK on other screens to return to the tank.
+3. Choose Feed to watch fish chase food. Choose Clean, use Up/Down to change rows, and press OK to wipe. In Choose Fish, pick a companion and its size, then confirm to add it.
+4. Toggle Water Sound for background bubbles. After three minutes without input, the controls hide for immersive viewing. Press any key to restore the menu and continue.
