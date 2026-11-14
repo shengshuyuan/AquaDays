@@ -56,14 +56,50 @@ test('care stamp line shows for ten seconds; idle hides the HUD and the waking k
   assert.equal(s.immersive,false);assert.equal(s.fed,fed);assert.equal(s.selected,selected);assert.equal(s.mode,'home');
   G.press(s,'down');assert.equal(s.selected,(selected+1)%G.HOME_BUTTONS,'keys work normally once the HUD is back');
 });
-test('water sound is off by default, toggles from the fourth button, and food splashes count plops',()=>{
+test('settings page: water sound is off by default and toggles there; food splashes count plops',()=>{
   const s=G.create('2026-11-06');assert.equal(s.sound,false);assert.equal(G.HOME_BUTTONS,4);
-  G.press(s,'up');assert.equal(s.selected,3,'up from feed wraps to the sound button');
+  G.press(s,'up');assert.equal(s.selected,3,'up from feed wraps to the settings button');
+  G.press(s,'ok');assert.equal(s.mode,'settings');assert.equal(s.setting,0);
   G.press(s,'ok');assert.equal(s.sound,true);assert.equal(s.message,'水声已打开');
-  G.press(s,'ok');assert.equal(s.sound,false);assert.equal(s.message,'水声已关闭');assert.equal(s.fed,0);assert.equal(s.mode,'home');
+  G.press(s,'ok');assert.equal(s.sound,false);assert.equal(s.message,'水声已关闭');assert.equal(s.mode,'settings');
+  G.press(s,'up');assert.equal(s.setting,2);G.press(s,'ok');assert.equal(s.mode,'home');assert.equal(s.fed,0);
+  G.press(s,'ok');G.press(s,'back');assert.equal(s.mode,'home','long press leaves settings');
   G.press(s,'down');G.press(s,'ok');assert.equal(s.fed,1);
   for(let i=0;i<24;i++)G.update(s,1/12);
   assert(s.plops>=2&&s.plops<G.create('2026-11-06').fish.length*2,'a pinch makes a few splashes, not one per pellet');
+});
+test('clock editor: five fields wrap within range, month length is respected, back cancels',()=>{
+  const s=G.create('2026-11-06');s.now=[2026,1,31,23,59];s.selected=3;G.press(s,'ok');G.press(s,'down');G.press(s,'ok');
+  assert.equal(s.mode,'clock');assert.deepEqual(s.clockEdit.v,[2026,1,31,23,59]);
+  G.press(s,'back');assert.equal(s.mode,'settings');assert.equal(s.clockSets,0,'cancel applies nothing');
+  G.press(s,'ok');G.press(s,'ok');G.press(s,'up');assert.deepEqual(s.clockEdit.v,[2026,2,28,23,59],'Jan 31 becomes Feb 28');
+  G.press(s,'ok');G.press(s,'down');assert.equal(s.clockEdit.v[2],27);
+  G.press(s,'ok');G.press(s,'up');assert.equal(s.clockEdit.v[3],0,'23 wraps to 0');
+  G.press(s,'ok');G.press(s,'up');assert.equal(s.clockEdit.v[4],0,'59 wraps to 0');
+  G.press(s,'ok');assert.equal(s.mode,'settings');assert.equal(s.clockSets,1);assert.deepEqual(s.clockSet,[2026,2,27,0,0]);
+  const t=G.create('2026-11-06');t.now=[G.YEAR_MIN,2,29,0,0];t.mode='settings';t.setting=1;G.press(t,'ok');
+  G.press(t,'down');assert.equal(t.clockEdit.v[0],G.YEAR_MIN,'year clamps at the minimum');
+  t.clockEdit.v[0]=G.YEAR_MAX;G.press(t,'up');assert.equal(t.clockEdit.v[0],G.YEAR_MAX,'year clamps at the maximum');
+  assert.equal(G.daysInMonth(2024,2),29);assert.equal(G.daysInMonth(2026,2),28);
+});
+test('progress survives a restart: snapshot and restore keep the tank, quota, and sound',()=>{
+  const s=G.create('2026-11-06');s.selected=2;G.press(s,'ok');G.press(s,'ok');G.press(s,'down');G.press(s,'ok');
+  s.selected=0;G.press(s,'ok');eat(s);s.sound=true;s.dirt[1].clean=true;
+  const snap=JSON.parse(JSON.stringify(G.snapshot(s)));
+  const r=G.restore('2026-11-06',snap);
+  assert.equal(r.fish.length,8);assert.equal(r.fed,1);assert.equal(r.sound,true);assert(r.dirt[1].clean);
+  assert.deepEqual(r.fish.map(f=>[f.kind,f.adult,f.growth]),s.fish.map(f=>[f.kind,f.adult,f.growth]));
+  assert.equal(r.mode,'home');assert.equal(r.message,'');
+  const later=G.restore('2026-11-08',snap);assert.equal(later.fed,0,'a later day refills the quota');assert(later.water<s.water);
+  const back=G.restore('2026-11-01',snap);assert.equal(back.day,'2026-11-06');assert.equal(back.fed,1,'clock set back keeps the saved day');
+  const future=G.restore('2026-11-06',{...snap,day:'2098-11-14'});
+  assert.equal(future.day,'2026-11-06');assert.equal(future.fish.length,8,'absurd future calendar is clamped, tank kept');
+  for(const bad of [null,{},{...snap,v:99},{...snap,fish:[]},{...snap,fish:[[99,0,0]]},{...snap,fed:3},{...snap,day:'x'}])
+    assert.equal(G.restore('2026-11-06',bad).fish.length,7,'malformed saves start a fresh tank');
+});
+test('a confirmed button sinks for a moment',()=>{
+  const s=G.create('2026-11-06');G.update(s,1);G.press(s,'down');assert.equal(s.pressedAt,-9,'only OK presses a button');
+  G.press(s,'ok');assert.equal(s.pressedAt,s.age);
 });
 test('a portion is sprinkled at the surface, slows as it sinks, and rests on the sand',()=>{
   const s=G.create('2026-11-06');s.fish.forEach(f=>{f.tx=f.x;});G.press(s,'ok');

@@ -17,8 +17,13 @@
   const SURFACE = 30, SAND = 252, ROWS = 3, WIPE = 0.7;
   // The care stamp line shows for STAMP_SECONDS; after IDLE_SECONDS without a key the HUD hides.
   const STAMP_SECONDS = 10, IDLE_SECONDS = 180;
-  // Home buttons: feed, clean, choose fish, water sound.
+  // Home buttons: feed, clean, choose fish, settings.
   const HOME_BUTTONS = 4;
+  // Settings rows: water sound, set the clock, back to the tank. A pressed button sinks for PRESS_SECONDS.
+  const SETTINGS_ROWS = 3, PRESS_SECONDS = 0.15;
+  // Clock editor fields in order: year, month, day, hour, minute.
+  const CLOCK_FIELDS = 5, YEAR_MIN = 2024, YEAR_MAX = 2036;
+  const SAVE_VERSION = 1;
   // Motion tuning. TURN is the whole squash-flip-unsquash turn; PITCH_SHEAR is pixels of
   // per-column y offset per pixel from sprite centre at full pitch (firmware applies it at blit time).
   const MOTION = { TURN: 0.36, TURN_COOLDOWN: 1.2, SWIM_FRAMES: 4, STEP_PX: 3, PITCH_SHEAR: 0.06,
@@ -36,6 +41,36 @@
     return typeof day === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(day)
       && Number.isFinite(Date.parse(day)) && new Date(day).toISOString().slice(0, 10) === day;
   }
+  function daysInMonth(year, month) { return new Date(Date.UTC(year, month, 0)).getUTCDate(); }
+  // What survives a power cut: the day, today's quota, the tank and its creatures, and the sound switch.
+  // Fish positions and animation restart fresh; firmware stores the same fields in NVS.
+  function snapshot(s) {
+    return { v: SAVE_VERSION, day: s.day, fed: s.fed, water: Math.round(s.water * 10) / 10, careDays: s.careDays,
+      stamped: s.stamped, sound: s.sound, dirt: s.dirt.map(d => d.clean),
+      fish: s.fish.map(f => [f.kind, f.adult ? 1 : 0, f.growth]) };
+  }
+  // Rebuilds a game from a snapshot, then moves it on to today. Anything malformed starts a fresh tank.
+  function restore(day, snap) {
+    // A saved day later than today (clock set back) is kept: days only move forward.
+    const ok = snap && snap.v === SAVE_VERSION && validDay(snap.day)
+      && Number.isInteger(snap.fed) && snap.fed >= 0 && snap.fed <= DAILY_FOOD
+      && Number.isFinite(snap.water) && snap.water >= 0 && snap.water <= 100
+      && Number.isInteger(snap.careDays) && snap.careDays >= 0
+      && Array.isArray(snap.dirt) && snap.dirt.length === ROWS
+      && Array.isArray(snap.fish) && snap.fish.length >= 1 && snap.fish.length <= MAX_FISH
+      && snap.fish.every(f => Array.isArray(f) && Number.isInteger(f[0]) && f[0] >= 0 && f[0] < catalog.length
+        && Number.isInteger(f[2]) && f[2] >= 0 && f[2] <= GROWTH);
+    if (!ok) return create(day);
+    // A date more than a month ahead of the wall clock is treated as corrupt (e.g. a wrapped year
+    // that got saved). Keep the tank, but start from "today" so the calendar is usable again.
+    const ahead = (Date.parse(snap.day) - Date.parse(day)) / 86400000;
+    const s = create(ahead > 31 ? day : snap.day);
+    Object.assign(s, { fed: snap.fed, water: snap.water, careDays: snap.careDays, stamped: !!snap.stamped, sound: !!snap.sound });
+    s.dirt.forEach((d, i) => { d.clean = !!snap.dirt[i]; });
+    s.fish = snap.fish.map(([kind, adult, growth], id) => Object.assign(fish(id, kind, !!adult), { growth }));
+    nextDay(s, day); s.message = ''; s.messageUntil = 0;
+    return s;
+  }
   function fish(id, kind, adult = false) {
     const bottom = !!catalog[kind].bottom, x = [64,155,73,172,119,180,100,145][id], direction = bottom ? 1 : id % 2 ? -1 : 1;
     const y = bottom ? FLOOR : [135,145,191,202,220,174,160,180][id];
@@ -46,9 +81,13 @@
   }
   function create(day) {
     if (!validDay(day)) throw new Error('Expected a valid YYYY-MM-DD date');
-    // sound: the running-water loop (off by default); plops counts food splashes for the audio side.
+    // sound: the aerator loop (off by default); plops counts food splashes for the audio side.
+    // Written by the platform every frame: now [y, m, d, h, min], clockSource, battery (0-100, -1 unknown).
+    // clockSets counts confirmed clock edits; the platform applies clockSet when it changes.
     return { day, fed: 0, water: 68, careDays: 0, stamped: false, stampUntil: 0, lastInput: 0, immersive: false,
-      sound: false, plops: 0, selected: 0,
+      sound: false, plops: 0, selected: 0, setting: 0, pressedAt: -9,
+      now: [Number(day.slice(0, 4)), Number(day.slice(5, 7)), Number(day.slice(8, 10)), 14, 36],
+      clockSource: 'build', battery: -1, clockEdit: null, clockSet: null, clockSets: 0,
       mode: 'home', choice: 0, adultChoice: false, lane: 0, age: 0, seed: 1179,
       message: '', messageUntil: 0, pellets: [], fish: [fish(0, 0, true), fish(1, 2, true), fish(2, 1), fish(3, 3), fish(4, 5), fish(5, 6, true), fish(6, 7, true)],
       // One dirt entry per glass row (top / middle / bottom); wipe is the squeegee pass being animated.
@@ -62,7 +101,6 @@
   }
   function nextDay(s, day) {
     if (!validDay(day)) throw new Error('Invalid calendar date');
-    // shortcut: preview state is in memory; firmware must persist date and quotas in NVS.
     if (day <= s.day) return false;
     const elapsed = (Date.parse(day) - Date.parse(s.day)) / 86400000;
     s.day = day; s.fed = 0; s.stamped = false; s.pellets = []; s.ripples = []; s.puffs = []; s.wipe = null;
@@ -75,11 +113,40 @@
     s.lastInput = s.age;
     // The first key after the idle hide only brings the HUD back, so it never feeds by accident.
     if (s.immersive) { s.immersive = false; return; }
-    if (key === 'back') { s.mode = 'home'; return; }
+    if (key === 'back') {
+      // Backing out of the clock editor discards the edit and returns to settings.
+      if (s.mode === 'clock') { s.clockEdit = null; s.mode = 'settings'; } else s.mode = 'home';
+      return;
+    }
+    if (key === 'ok') s.pressedAt = s.age;
     const delta = key === 'up' ? -1 : 1;
+    if (s.mode === 'settings') {
+      if (key !== 'ok') { s.setting = (s.setting + delta + SETTINGS_ROWS) % SETTINGS_ROWS; return; }
+      if (s.setting === 0) { s.sound = !s.sound; note(s, s.sound ? '水声已打开' : '水声已关闭'); }
+      else if (s.setting === 1) { s.clockEdit = { v: s.now.slice(), field: 0 }; s.mode = 'clock'; }
+      else s.mode = 'home';
+      return;
+    }
+    if (s.mode === 'clock') {
+      const e = s.clockEdit, v = e.v;
+      if (key !== 'ok') {
+        // Year clamps at the ends so a burst of key repeats cannot jump from 2024 to 2099.
+        // Month / day / hour / minute still wrap, which is natural while adjusting.
+        if (e.field === 0) v[0] = Math.max(YEAR_MIN, Math.min(YEAR_MAX, v[0] - delta));
+        else {
+          const span = [[YEAR_MIN, YEAR_MAX], [1, 12], [1, daysInMonth(v[0], v[1])], [0, 23], [0, 59]][e.field];
+          v[e.field] = span[0] + ((v[e.field] - span[0] - delta + (span[1] - span[0] + 1)) % (span[1] - span[0] + 1));
+        }
+        v[2] = Math.min(v[2], daysInMonth(v[0], v[1]));
+        return;
+      }
+      if (++e.field < CLOCK_FIELDS) return;
+      s.clockSet = v.slice(); s.clockSets++; s.clockEdit = null; s.mode = 'settings'; note(s, '时间已更新');
+      return;
+    }
     if (s.mode === 'home') {
       if (key !== 'ok') { s.selected = (s.selected + delta + HOME_BUTTONS) % HOME_BUTTONS; return; }
-      if (s.selected === 3) { s.sound = !s.sound; note(s, s.sound ? '水声已打开' : '水声已关闭'); return; }
+      if (s.selected === 3) { s.mode = 'settings'; s.setting = 0; return; }
       if (s.selected === 0) {
         if (s.fed >= DAILY_FOOD) { note(s, '今天吃饱啦，明天再喂'); return; }
         if (s.pellets.length) { note(s, '等鱼儿吃完这一份'); return; }
@@ -240,8 +307,9 @@
     }
     return { role: 'swim', frame: Math.floor(f.phase / TAU * MOTION.SWIM_FRAMES) % MOTION.SWIM_FRAMES };
   }
-  const api = { isDaytime, create, press, update, nextDay, pose, catalog, MAX_FISH, DAILY_FOOD, GROWTH, MOTION, SHADES,
-    SURFACE, SAND, ROWS, WIPE, STAMP_SECONDS, IDLE_SECONDS, HOME_BUTTONS };
+  const api = { isDaytime, create, press, update, nextDay, pose, snapshot, restore, daysInMonth, catalog, MAX_FISH,
+    DAILY_FOOD, GROWTH, MOTION, SHADES, SURFACE, SAND, ROWS, WIPE, STAMP_SECONDS, IDLE_SECONDS, HOME_BUTTONS,
+    SETTINGS_ROWS, PRESS_SECONDS, CLOCK_FIELDS, YEAR_MIN, YEAR_MAX, SAVE_VERSION };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.AquaGame = api;
 })(globalThis);

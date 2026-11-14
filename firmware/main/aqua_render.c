@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
-enum { INK = 0x082e35, PALE = 0xd6e6c7, MUTED = 0x8ab4ab, ACCENT = 0xf4c783, PAPER = 0xeee6c9 };
+enum { INK = 0x082e35, PALE = 0xd6e6c7, MUTED = 0x8ab4ab, ACCENT = 0xf4c783, PAPER = 0xeee6c9, ORANGE = 0xed8b47 };
 enum { SHADE_DAY = 0, SHADE_DAY_FAR = 1, SHADE_NIGHT = 2, SHADE_NIGHT_FAR = 3 };
 
 static const aq_assets_t *A;
@@ -380,11 +380,117 @@ static void puff(const aq_fx_t *p, const aq_state_t *s, int light) {
 
 // ---- Screens --------------------------------------------------------------
 
-static void button(int x, int y, int w, const char *label, bool selected, bool disabled) {
-    rect(x, y, w, 22, selected ? 0x245958 : 0x103a40);
-    if (selected) rect(x + 8, y + 20, w - 16, 2, disabled ? MUTED : ACCENT);
+// Pixel keycap: 22 px tall, dual drop shadow, bright L / dark L bevel, optional gold bezel when selected.
+// Pressed keys sink 1 px and invert the bevel so they read as recessed.
+enum {
+    BTN_FILL = 0x103a40, BTN_EDGE = 0x2a6368, BTN_HI = 0x4a8f90, BTN_MID = 0x2f7074, BTN_LO = 0x071e22,
+    BTN_SHADOW = 0x020e11, BTN_RIM = 0x0a252a,
+    BTN_SEL_FILL = 0x2c6e66, BTN_SEL_HI = 0x7ec4b0, BTN_SEL_MID = 0x3f9184, BTN_SEL_LO = 0x143836,
+    BTN_DOWN_FILL = 0x0c2e34, BTN_DOWN_EDGE = 0x06181c,
+    BAR_WELL = 0x0a2a30, BAR_HI = 0x3d6f72, BAR_LO = 0x061c20, BAR_SHELF = 0x1a4a50,
+    TRAY = 0x0a282e, TRAY_HI = 0x1f555a, JUICE_HI = 0xe8f5e0, BATT_LOW_WELL = 0x3a2010
+};
+
+static void button(int x, int y, int w, const char *label, bool selected, bool disabled, bool pressed) {
+    const int h = 22, top = y + (pressed ? 1 : 0);
+    uint32_t edge = selected ? (disabled ? MUTED : ACCENT) : (pressed ? BTN_DOWN_EDGE : BTN_EDGE);
+    uint32_t face = pressed ? BTN_DOWN_FILL : selected ? BTN_SEL_FILL : BTN_FILL;
+    uint32_t hi = selected ? BTN_SEL_HI : BTN_HI, mid = selected ? BTN_SEL_MID : BTN_MID, lo = selected ? BTN_SEL_LO : BTN_LO;
+    if (!pressed) {
+        rect(x + 2, y + h + 1, w - 4, 1, BTN_SHADOW);
+        rect(x + 1, y + h, w - 2, 1, BTN_RIM);
+    }
+    rect(x + 1, top, w - 2, 1, edge); rect(x + 1, top + h - 1, w - 2, 1, edge);
+    rect(x, top + 1, 1, h - 2, edge); rect(x + w - 1, top + 1, 1, h - 2, edge);
+    rect(x + 1, top + 1, w - 2, h - 2, face);
+    if (!pressed) {
+        rect(x + 1, top + 1, w - 2, 1, hi); rect(x + 1, top + 1, 1, h - 2, hi);
+        rect(x + 2, top + 2, w - 4, 1, mid);
+        rect(x + w - 2, top + 2, 1, h - 3, lo); rect(x + 2, top + h - 2, w - 3, 1, lo);
+    } else {
+        rect(x + 1, top + 1, w - 2, 1, BTN_LO); rect(x + 1, top + 1, 1, h - 2, BTN_LO);
+        rect(x + w - 2, top + 2, 1, h - 3, BTN_MID); rect(x + 2, top + h - 2, w - 3, 1, BTN_MID);
+    }
     // The browser centres on x + w / 2 and rounds the half pixel of odd widths up.
-    text(label, x + (w + 1) / 2, y + 5, disabled ? MUTED : selected ? ACCENT : PALE, CENTER);
+    text(label, x + (w + 1) / 2, top + 5, disabled ? MUTED : selected ? ACCENT : PALE, CENTER);
+}
+
+static bool pressed_now(const aq_state_t *s) { return s->age - s->pressed_at < AQ_PRESS_SECONDS; }
+
+// Top bar: hairline shelf under the title strip, tank count, beveled battery at the right.
+static void status_bar(const aq_state_t *s) {
+    char buf[16];
+    rect(0, 18, 240, 1, BAR_SHELF); rect(0, 19, 240, 1, BAR_LO);
+    snprintf(buf, sizeof buf, "鱼缸 %d/%d", s->fish_count, AQ_MAX_FISH);
+    text(buf, 66, 4, MUTED, LEFT);
+    if (s->battery < 0) return;
+    bool low = s->battery <= 15;
+    uint32_t frame = low ? ORANGE : MUTED, ink = low ? ORANGE : PALE;
+    int juice = (s->battery * 12 + 50) / 100;
+    if (juice < 1) juice = 1;
+    rect(213, 6, 16, 8, low ? BATT_LOW_WELL : BAR_WELL);
+    border(213, 6, 16, 8, frame); rect(229, 8, 2, 4, frame);
+    if (!low) { rect(214, 7, 14, 1, BAR_HI); rect(214, 12, 14, 1, BAR_LO); }
+    rect(215, 8, juice, 4, ink);
+    if (!low) rect(215, 8, juice, 1, JUICE_HI);
+    snprintf(buf, sizeof buf, "%d%%", s->battery);
+    text(buf, 209, 4, frame, RIGHT);
+}
+
+static void panel(const aq_state_t *s, int hour, const char *title) {
+    memcpy(FB, aq_is_daytime(hour) ? A->bg_day : A->bg_night, AQ_W * AQ_H * 2);
+    rect(6, 28, 228, 228, 0x10434d);
+    text(title, 120, 33, PALE, CENTER);
+    status_bar(s);
+}
+
+static void settings(const aq_state_t *s, int hour) {
+    static const char *SOURCES[] = {"未对时", "接着上次的时间", "已联网同步", "手动设置", "电脑同步"};
+    panel(s, hour, "设置");
+    border(20, 58, 200, 70, 0x2e6b70);
+    rect(21, 59, 198, 68, 0x134e59);
+    char when[24], power[8];
+    snprintf(when, sizeof when, "%04d.%02d.%02d %02d:%02d", s->now[0], s->now[1], s->now[2], s->now[3], s->now[4]);
+    snprintf(power, sizeof power, "%d%%", s->battery);
+    const char *rows[3][2] = {{"时间", when}, {"对时", SOURCES[s->clock_source]}, {"电量", s->battery < 0 ? "未知" : power}};
+    for (int i = 0; i < 3; i++) { text(rows[i][0], 30, 66 + i * 20, MUTED, LEFT); text(rows[i][1], 210, 66 + i * 20, PALE, RIGHT); }
+    const char *labels[AQ_SETTINGS_ROWS] = {s->sound ? "水声：开" : "水声：关", "调整时间", "返回鱼缸"};
+    for (int i = 0; i < AQ_SETTINGS_ROWS; i++)
+        button(20, 144 + i * 32, 200, labels[i], s->setting == i, false, s->setting == i && pressed_now(s));
+    if (s->message && s->age < s->message_until) text(s->message, 120, 239, ACCENT, CENTER);
+    text("长按确定返回鱼缸", 120, 280, MUTED, CENTER);
+    text("上下选择 · 确定执行", 120, 302, MUTED, CENTER);
+}
+
+// Clock editor: date and time as boxed fields, the field being edited outlined in gold.
+static int clock_field(const aq_state_t *s, int i, int x, int y, const char *str) {
+    int w = (int)strlen(str) * 6 + 8;
+    bool on = s->clock_field == i;
+    rect(x, y, w, 18, on ? BTN_SEL_FILL : 0x134e59);
+    border(x, y, w, 18, on ? ACCENT : 0x2e6b70);
+    text(str, x + 4, y + 3, on ? ACCENT : PALE, LEFT);
+    return x + w;
+}
+
+static void clock_editor(const aq_state_t *s, int hour) {
+    panel(s, hour, "调整时间");
+    char buf[24];
+    const int *v = s->clock_edit;
+    snprintf(buf, sizeof buf, "%d", v[0]);
+    int x = clock_field(s, 0, 56, 84, buf); text("年", x + 4, 87, MUTED, LEFT);
+    snprintf(buf, sizeof buf, "%02d", v[1]);
+    x = clock_field(s, 1, x + 20, 84, buf); text("月", x + 4, 87, MUTED, LEFT);
+    snprintf(buf, sizeof buf, "%02d", v[2]);
+    x = clock_field(s, 2, x + 20, 84, buf); text("日", x + 4, 87, MUTED, LEFT);
+    snprintf(buf, sizeof buf, "%02d", v[3]);
+    x = clock_field(s, 3, 93, 124, buf); text(":", x + 4, 127, MUTED, LEFT);
+    snprintf(buf, sizeof buf, "%02d", v[4]);
+    clock_field(s, 4, x + 14, 124, buf);
+    text("上下改数字 · 确定下一项", 120, 170, PALE, CENTER);
+    text("改完分钟再按确定保存", 120, 190, MUTED, CENTER);
+    snprintf(buf, sizeof buf, "第 %d/%d 项", s->clock_field + 1, AQ_CLOCK_FIELDS);
+    text(buf, 120, 230, ACCENT, CENTER);
+    text("长按确定取消", 120, 280, MUTED, CENTER);
 }
 
 // Water occupies rows WATER_TOP..WATER_BOTTOM of the background; the bars above and below hold the HUD.
@@ -410,8 +516,7 @@ static int tank(const aq_state_t *s, int hour, int minute) {
     if (s->immersive) immersive_bars(bg);
     else {
         char buf[48];
-        snprintf(buf, sizeof buf, "鱼缸 %d/%d", s->fish_count, AQ_MAX_FISH);
-        text(buf, 231, 4, MUTED, RIGHT);
+        status_bar(s);
         snprintf(buf, sizeof buf, "%02d:%02d", hour, minute);
         clock_digits(buf);
         static const char *WEEK[7] = {"周日", "周一", "周二", "周三", "周四", "周五", "周六"};
@@ -466,12 +571,8 @@ static void clean_overlay(const aq_state_t *s, int light) {
 }
 
 static void selection(const aq_state_t *s, int hour) {
-    memcpy(FB, aq_is_daytime(hour) ? A->bg_day : A->bg_night, AQ_W * AQ_H * 2);
-    rect(6, 28, 228, 228, 0x10434d);
-    text(s->mode == AQ_MODE_SIZE ? "选择大小" : "选择伙伴", 120, 33, PALE, CENTER);
+    panel(s, hour, s->mode == AQ_MODE_SIZE ? "选择大小" : "选择伙伴");
     char buf[32];
-    snprintf(buf, sizeof buf, "%d/%d", s->fish_count, AQ_MAX_FISH);
-    text(buf, 228, 4, MUTED, RIGHT);
     border(20, 58, 200, 133, 0x2e6b70);
     rect(21, 59, 198, 131, 0x134e59);
     const aq_kind_t *kind = &AQ_CATALOG[s->choice];
@@ -480,8 +581,8 @@ static void selection(const aq_state_t *s, int hour) {
     text(kind->name, 120, 156, ACCENT, CENTER);
     text(kind->trait, 120, 170, MUTED, CENTER);
     if (s->mode == AQ_MODE_SIZE) {
-        button(24, 211, 88, kind->bottom ? "幼蟹" : "幼鱼", !s->adult_choice, false);
-        button(128, 211, 88, kind->bottom ? "成蟹" : "成鱼", s->adult_choice, false);
+        button(24, 211, 88, kind->bottom ? "幼蟹" : "幼鱼", !s->adult_choice, false, false);
+        button(128, 211, 88, kind->bottom ? "成蟹" : "成鱼", s->adult_choice, false, false);
         text(kind->bottom ? "沿着缸底慢慢爬行" : s->adult_choice ? "入住就能看大鱼" : "喂食后慢慢长大", 120, 245, PALE, CENTER);
     } else {
         for (int slot = 0; slot < 3; slot++) {
@@ -494,7 +595,7 @@ static void selection(const aq_state_t *s, int hour) {
         text(buf, 120, 53, MUTED, CENTER);
     }
     bool full = s->fish_count >= AQ_MAX_FISH;
-    button(20, 271, 200, full ? "鱼缸已满" : s->mode == AQ_MODE_SIZE ? "放入鱼缸" : "下一步：选择大小", true, full);
+    button(20, 271, 200, full ? "鱼缸已满" : s->mode == AQ_MODE_SIZE ? "放入鱼缸" : "下一步：选择大小", true, full, pressed_now(s));
     text("上下切换 · 确定选择", 120, 302, MUTED, CENTER);
 }
 
@@ -518,6 +619,8 @@ void aq_render(uint16_t *fb, const aq_state_t *s, int hour, int minute) {
     FB = fb;
     mark(-1);
     if (s->mode == AQ_MODE_SELECT || s->mode == AQ_MODE_SIZE) { selection(s, hour); mark(AQ_PROF_BG); return; }
+    if (s->mode == AQ_MODE_SETTINGS) { settings(s, hour); mark(AQ_PROF_BG); return; }
+    if (s->mode == AQ_MODE_CLOCK) { clock_editor(s, hour); mark(AQ_PROF_BG); return; }
     int light = tank(s, hour, minute);
     if (s->immersive) { mark(AQ_PROF_HUD); return; }
     char buf[48];
@@ -531,15 +634,17 @@ void aq_render(uint16_t *fb, const aq_state_t *s, int hour, int minute) {
         text(buf, 230, 280, PALE, RIGHT);
         text("上下选行 · 确定擦一下", 120, 302, MUTED, CENTER);
     } else {
-        rect(9, 273, 222, 1, 0x35615e);
+        rect(9, 273, 222, 1, BAR_HI); rect(9, 274, 222, 1, BTN_RIM);
         snprintf(buf, sizeof buf, "水质 %d%%", jround(s->water));
         text(buf, 10, 278, s->water < 60 ? ACCENT : PALE, LEFT);
         rect(121, 277, 1, 12, 0x35615e);
         snprintf(buf, sizeof buf, "喂食 %d/%d", s->fed, AQ_DAILY_FOOD);
         text(buf, 230, 278, s->fed == AQ_DAILY_FOOD ? ACCENT : PALE, RIGHT);
-        // Four 51 px buttons with 6 px gaps fill the 222 px HUD row.
-        const char *names[AQ_HOME_BUTTONS] = {s->fed == AQ_DAILY_FOOD ? "已喂饱" : "喂食", "擦缸", "选鱼", s->sound ? "水声 开" : "水声 关"};
-        for (int i = 0; i < AQ_HOME_BUTTONS; i++) button(9 + i * 57, 295, 51, names[i], s->selected == i, i == 0 && s->fed == AQ_DAILY_FOOD);
+        // Recessed tray under the four keys, then the keys themselves (51 px + 6 px gaps).
+        rect(7, 293, 226, 25, TRAY); rect(8, 294, 224, 1, TRAY_HI);
+        const char *names[AQ_HOME_BUTTONS] = {s->fed == AQ_DAILY_FOOD ? "已喂饱" : "喂食", "擦缸", "选鱼", "设置"};
+        for (int i = 0; i < AQ_HOME_BUTTONS; i++)
+            button(9 + i * 57, 295, 51, names[i], s->selected == i, i == 0 && s->fed == AQ_DAILY_FOOD, s->selected == i && pressed_now(s));
     }
     if (s->message && s->age < s->message_until) {
         rect(9, 250, 222, 18, 0x153e43); text(s->message, 120, 254, PAPER, CENTER);

@@ -325,7 +325,7 @@
     ctx.drawImage(sceneBackground(options),0,0);
     if(s.immersive) immersiveBars(ctx,sceneBackground(options));
     else {
-      text(ctx,`鱼缸 ${s.fish.length}/${AquaGame.MAX_FISH}`,231,4,C.muted,'right');
+      statusBar(ctx,s);
       clock(ctx,options.time||'14:36');
       text(ctx,(options.date||s.day.replaceAll('-','.'))+' '+(options.weekday||'周五'),120,79,C.muted,'center');
     }
@@ -358,15 +358,86 @@
     if(edge&&edge.t<1)squeegee(ctx,edge.x,ROWS[s.wipe.lane][0],ROWS[s.wipe.lane][1],light);
     else if(looksDirty(s,s.lane))squeegee(ctx,GLASS_X0+14+Math.round(Math.sin(s.age*3)),y0,y1,light);
   }
-  function button(ctx,x,y,w,label,selected,disabled=false) {
-    rect(ctx,x,y,w,22,selected?'#245958':'#103a40');
-    if(selected)rect(ctx,x+8,y+20,w-16,2,disabled?C.muted:C.accent);
-    text(ctx,label,x+w/2,y+5,disabled?C.muted:selected?C.accent:C.pale,'center');
+  // Pixel keycap: 22 px tall, dual drop shadow, bright L / dark L bevel, optional gold bezel when selected.
+  // Pressed keys sink 1 px and invert the bevel so they read as recessed.
+  const BTN={ fill:'#103a40', edge:'#2a6368', hi:'#4a8f90', mid:'#2f7074', lo:'#071e22',
+    shadow:'#020e11', rim:'#0a252a',
+    selFill:'#2c6e66', selHi:'#7ec4b0', selMid:'#3f9184', selLo:'#143836',
+    downFill:'#0c2e34', downEdge:'#06181c' };
+  function button(ctx,x,y,w,label,selected,disabled=false,pressed=false) {
+    const h=22,top=y+(pressed?1:0);
+    const edge=selected?(disabled?C.muted:C.accent):(pressed?BTN.downEdge:BTN.edge);
+    const face=pressed?BTN.downFill:selected?BTN.selFill:BTN.fill;
+    const hi=selected?BTN.selHi:BTN.hi, mid=selected?BTN.selMid:BTN.mid, lo=selected?BTN.selLo:BTN.lo;
+    if(!pressed){ rect(ctx,x+2,y+h+1,w-4,1,BTN.shadow); rect(ctx,x+1,y+h,w-2,1,BTN.rim); }
+    rect(ctx,x+1,top,w-2,1,edge); rect(ctx,x+1,top+h-1,w-2,1,edge);
+    rect(ctx,x,top+1,1,h-2,edge); rect(ctx,x+w-1,top+1,1,h-2,edge);
+    rect(ctx,x+1,top+1,w-2,h-2,face);
+    if(!pressed){
+      rect(ctx,x+1,top+1,w-2,1,hi); rect(ctx,x+1,top+1,1,h-2,hi);
+      rect(ctx,x+2,top+2,w-4,1,mid);
+      rect(ctx,x+w-2,top+2,1,h-3,lo); rect(ctx,x+2,top+h-2,w-3,1,lo);
+    } else {
+      rect(ctx,x+1,top+1,w-2,1,BTN.lo); rect(ctx,x+1,top+1,1,h-2,BTN.lo);
+      rect(ctx,x+w-2,top+2,1,h-3,BTN.mid); rect(ctx,x+2,top+h-2,w-3,1,BTN.mid);
+    }
+    text(ctx,label,x+w/2,top+5,disabled?C.muted:selected?C.accent:C.pale,'center');
+  }
+  const pressedNow=s=>s.age-s.pressedAt<AquaGame.PRESS_SECONDS;
+  // Top bar: hairline shelf under the title strip, tank count, beveled battery at the right.
+  function statusBar(ctx,s) {
+    rect(ctx,0,18,240,1,'#1a4a50'); rect(ctx,0,19,240,1,'#061c20');
+    text(ctx,`鱼缸 ${s.fish.length}/${AquaGame.MAX_FISH}`,66,4,C.muted);
+    if(s.battery<0) return;
+    const low=s.battery<=15, frame=low?C.orange:C.muted, ink=low?C.orange:C.pale;
+    rect(ctx,213,6,16,8,low?'#3a2010':'#0a2a30');
+    border(ctx,213,6,16,8,frame); rect(ctx,229,8,2,4,frame);
+    if(!low){ rect(ctx,214,7,14,1,'#3d6f72'); rect(ctx,214,12,14,1,'#061c20'); }
+    const juice=Math.max(1,Math.round(s.battery*12/100));
+    rect(ctx,215,8,juice,4,ink);
+    if(!low) rect(ctx,215,8,juice,1,'#e8f5e0');
+    text(ctx,`${s.battery}%`,209,4,frame,'right');
+  }
+  function panel(ctx,s,options,title) {
+    ctx.drawImage(sceneBackground(options),0,0); rect(ctx,6,28,228,228,'#10434d');
+    text(ctx,title,120,33,C.pale,'center'); statusBar(ctx,s);
+  }
+  const pad2=n=>String(n).padStart(2,'0');
+  const SOURCES={ wifi:'已联网同步', saved:'接着上次的时间', build:'未对时', manual:'手动设置', flash:'电脑同步', browser:'跟随电脑' };
+  function settings(ctx,s,options) {
+    panel(ctx,s,options,'设置');
+    border(ctx,20,58,200,70,'#2e6b70'); rect(ctx,21,59,198,68,'#134e59');
+    const [y,m,d,h,mi]=s.now;
+    [['时间',`${y}.${pad2(m)}.${pad2(d)} ${pad2(h)}:${pad2(mi)}`],['对时',SOURCES[s.clockSource]||'未对时'],
+      ['电量',s.battery<0?'未知':`${s.battery}%`]].forEach(([k,v],i)=>{
+      text(ctx,k,30,66+i*20,C.muted); text(ctx,v,210,66+i*20,C.pale,'right');
+    });
+    [s.sound?'水声：开':'水声：关','调整时间','返回鱼缸'].forEach((label,i)=>
+      button(ctx,20,144+i*32,200,label,s.setting===i,false,s.setting===i&&pressedNow(s)));
+    if(s.message&&s.age<s.messageUntil) text(ctx,s.message,120,239,C.accent,'center');
+    text(ctx,'长按确定返回鱼缸',120,280,C.muted,'center');
+    text(ctx,'上下选择 · 确定执行',120,302,C.muted,'center');
+  }
+  // Clock editor: date and time as boxed fields, the field being edited outlined in gold.
+  function clockEditor(ctx,s,options) {
+    panel(ctx,s,options,'调整时间');
+    const e=s.clockEdit,v=e.v;
+    const field=(i,x,y,str)=>{
+      const w=str.length*6+8,on=e.field===i;
+      rect(ctx,x,y,w,18,on?BTN.selFill:'#134e59'); border(ctx,x,y,w,18,on?C.accent:'#2e6b70');
+      text(ctx,str,x+4,y+3,on?C.accent:C.pale); return x+w;
+    };
+    let x=field(0,56,84,String(v[0])); text(ctx,'年',x+4,87,C.muted);
+    x=field(1,x+20,84,pad2(v[1])); text(ctx,'月',x+4,87,C.muted);
+    x=field(2,x+20,84,pad2(v[2])); text(ctx,'日',x+4,87,C.muted);
+    x=field(3,93,124,pad2(v[3])); text(ctx,':',x+4,127,C.muted); field(4,x+14,124,pad2(v[4]));
+    text(ctx,'上下改数字 · 确定下一项',120,170,C.pale,'center');
+    text(ctx,'改完分钟再按确定保存',120,190,C.muted,'center');
+    text(ctx,`第 ${e.field+1}/${AquaGame.CLOCK_FIELDS} 项`,120,230,C.accent,'center');
+    text(ctx,'长按确定取消',120,280,C.muted,'center');
   }
   function selection(ctx,s,options) {
-    ctx.drawImage(sceneBackground(options),0,0); rect(ctx,6,28,228,228,'#10434d');
-    text(ctx,s.mode==='size'?'选择大小':'选择伙伴',120,33,C.pale,'center');
-    text(ctx,`${s.fish.length}/${AquaGame.MAX_FISH}`,228,4,C.muted,'right');
+    panel(ctx,s,options,s.mode==='size'?'选择大小':'选择伙伴');
     border(ctx,20,58,200,133,'#2e6b70');
     rect(ctx,21,59,198,131,'#134e59');
     const size=s.mode==='size'?(s.adultChoice?1.5:1):1.5,cycle=Math.floor(s.age*6)%4;
@@ -387,12 +458,14 @@
 
     }
     const full=s.fish.length>=AquaGame.MAX_FISH;
-    button(ctx,20,271,200,full?'鱼缸已满':s.mode==='size'?'放入鱼缸':'下一步：选择大小',true,full);
+    button(ctx,20,271,200,full?'鱼缸已满':s.mode==='size'?'放入鱼缸':'下一步：选择大小',true,full,pressedNow(s));
     text(ctx,'上下切换 · 确定选择',120,302,C.muted,'center');
   }
   function render(canvas,s,options={}) {
     const ctx=canvas.getContext('2d'); ctx.imageSmoothingEnabled=false;
     if(s.mode==='select'||s.mode==='size') selection(ctx,s,options);
+    else if(s.mode==='settings') settings(ctx,s,options);
+    else if(s.mode==='clock') clockEditor(ctx,s,options);
     else {
       const light=tank(ctx,s,options);
       if(s.immersive) return;
@@ -403,12 +476,14 @@
         text(ctx,`水质 ${Math.round(s.water)}%`,230,280,C.pale,'right');
         text(ctx,'上下选行 · 确定擦一下',120,302,C.muted,'center');
       } else {
-        rect(ctx,9,273,222,1,'#35615e');
+        rect(ctx,9,273,222,1,'#3d6f72'); rect(ctx,9,274,222,1,'#0a252a');
         text(ctx,`水质 ${Math.round(s.water)}%`,10,278,s.water<60?C.accent:C.pale);
         rect(ctx,121,277,1,12,'#35615e');
         text(ctx,`喂食 ${s.fed}/2`,230,278,s.fed===2?C.accent:C.pale,'right');
-        // Four 51 px buttons with 6 px gaps fill the 222 px HUD row.
-        [s.fed===2?'已喂饱':'喂食','擦缸','选鱼',s.sound?'水声 开':'水声 关'].forEach((name,i)=>button(ctx,9+i*57,295,51,name,s.selected===i,i===0&&s.fed===2));
+        // Recessed tray under the four keys, then the keys themselves (51 px + 6 px gaps).
+        rect(ctx,7,293,226,25,'#0a282e'); rect(ctx,8,294,224,1,'#1f555a');
+        [s.fed===2?'已喂饱':'喂食','擦缸','选鱼','设置'].forEach((name,i)=>
+          button(ctx,9+i*57,295,51,name,s.selected===i,i===0&&s.fed===2,s.selected===i&&pressedNow(s)));
       }
       if(s.message && s.age<s.messageUntil) {
         rect(ctx,9,250,222,18,'#153e43'); text(ctx,s.message,120,254,C.paper,'center');
@@ -419,7 +494,13 @@
   }
   function scenario(name) {
     const s=AquaGame.create('2026-11-06');
+    s.battery=76;
     if(name==='select') { s.mode='select'; s.choice=1; }
+    if(name==='settings') { s.clockSource='wifi'; s.selected=3; AquaGame.press(s,'ok'); AquaGame.press(s,'down'); }
+    if(name==='clock') {
+      s.selected=3; AquaGame.press(s,'ok'); AquaGame.press(s,'down'); AquaGame.press(s,'ok');
+      AquaGame.press(s,'ok'); AquaGame.press(s,'ok'); AquaGame.press(s,'ok'); AquaGame.press(s,'up');
+    }
     if(name==='feed') {
       s.fed=1; AquaGame.press(s,'ok');
       for(let i=0;i<14;i++) AquaGame.update(s,1/12);
@@ -435,6 +516,7 @@
     if(name==='immersive') {
       for(let i=0;i<AquaGame.IDLE_SECONDS*12+24;i++) AquaGame.update(s,1/12);
     }
+    s.pressedAt=-9;
     return s;
   }
   root.AquaRender={ ready, render, scenario, background, nightBackground, sprites, SIZES, glyphs, text, makeCanvas, W,H,SW,SH };

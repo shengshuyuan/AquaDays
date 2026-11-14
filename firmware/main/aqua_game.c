@@ -62,8 +62,57 @@ void aq_create(aq_state_t *s, aq_date_t day) {
     static const bool ADULT[7] = {true, true, false, false, false, true, true};
     memset(s, 0, sizeof(*s));
     s->day = day; s->water = 68.0f; s->seed = 1179u; s->mode = AQ_MODE_HOME;
+    s->pressed_at = -9.0; s->battery = -1; s->clock_source = AQ_CLOCK_BUILD;
+    s->now[0] = day.year; s->now[1] = day.month; s->now[2] = day.day; s->now[3] = 14; s->now[4] = 36;
     s->fish_count = 7;
     for (int i = 0; i < 7; i++) make_fish(&s->fish[i], i, KINDS[i], ADULT[i]);
+}
+
+int aq_days_in_month(int year, int month) {
+    static const int DAYS[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    bool leap = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+    return month == 2 && leap ? 29 : DAYS[(month - 1) % 12];
+}
+
+void aq_snapshot(const aq_state_t *s, aq_save_t *out) {
+    memset(out, 0, sizeof(*out));
+    out->version = AQ_SAVE_VERSION; out->fed = (uint8_t)s->fed; out->stamped = s->stamped; out->sound = s->sound;
+    out->year = (uint16_t)s->day.year; out->month = (uint8_t)s->day.month; out->day = (uint8_t)s->day.day;
+    out->water_tenths = (int16_t)jround(s->water * 10.0f); out->care_days = (uint16_t)s->care_days;
+    for (int i = 0; i < AQ_ROWS; i++) out->dirt_clean[i] = s->dirt_clean[i];
+    out->fish_count = (uint8_t)s->fish_count;
+    for (int i = 0; i < s->fish_count; i++) {
+        out->fish_kind[i] = (uint8_t)s->fish[i].kind; out->fish_adult[i] = s->fish[i].adult;
+        out->fish_growth[i] = (uint8_t)s->fish[i].growth;
+    }
+}
+
+bool aq_restore(aq_state_t *s, const aq_save_t *v, aq_date_t today) {
+    bool ok = v->version == AQ_SAVE_VERSION && v->fed <= AQ_DAILY_FOOD && v->water_tenths >= 0 && v->water_tenths <= 1000
+        // Allow reading up to 2099 so an old wrapped-year save still keeps the tank; aq_restore then
+        // clamps absurd future calendars back to "today". The editor itself only goes to AQ_YEAR_MAX.
+        && v->year >= 2000 && v->year <= 2099 && v->month >= 1 && v->month <= 12
+        && v->day >= 1 && v->day <= aq_days_in_month(v->year, v->month)
+        && v->fish_count >= 1 && v->fish_count <= AQ_MAX_FISH;
+    for (int i = 0; ok && i < v->fish_count; i++) ok = v->fish_kind[i] < AQ_KINDS && v->fish_growth[i] <= AQ_GROWTH;
+    if (!ok) { aq_create(s, today); return false; }
+    aq_date_t saved_day = {v->year, v->month, v->day};
+    // A date more than a month ahead of the wall clock is treated as corrupt (e.g. a wrapped year
+    // that got saved). Keep the tank, but start from "today" so the calendar is usable again.
+    long ahead = aq_days_from_civil(saved_day) - aq_days_from_civil(today);
+    aq_create(s, ahead > 31 ? today : saved_day);
+    s->fed = v->fed; s->water = v->water_tenths / 10.0f; s->care_days = v->care_days;
+    s->stamped = v->stamped; s->sound = v->sound;
+    for (int i = 0; i < AQ_ROWS; i++) s->dirt_clean[i] = v->dirt_clean[i];
+    s->fish_count = v->fish_count;
+    for (int i = 0; i < v->fish_count; i++) {
+        make_fish(&s->fish[i], i, v->fish_kind[i], v->fish_adult[i]);
+        s->fish[i].growth = v->fish_growth[i];
+    }
+    // A saved day later than today (clock set back) is kept: days only move forward.
+    aq_next_day(s, today);
+    s->message = NULL; s->message_until = 0;
+    return true;
 }
 
 static void note(aq_state_t *s, const char *text) { s->message = text; s->message_until = s->age + 3.0; }
@@ -86,7 +135,6 @@ static int first_dirty(const aq_state_t *s) {
 
 bool aq_next_day(aq_state_t *s, aq_date_t day) {
     long from = aq_days_from_civil(s->day), to = aq_days_from_civil(day);
-    // shortcut: state lives in RAM like the browser preview; persisting date and quotas in NVS is future work.
     if (to <= from) return false;
     long elapsed = to - from;
     s->day = day; s->fed = 0; s->stamped = false;
@@ -115,11 +163,48 @@ void aq_press(aq_state_t *s, aq_key_t key) {
     s->last_input = s->age;
     // The first key after the idle hide only brings the HUD back, so it never feeds by accident.
     if (s->immersive) { s->immersive = false; return; }
-    if (key == AQ_KEY_BACK) { s->mode = AQ_MODE_HOME; return; }
+    if (key == AQ_KEY_BACK) {
+        // Backing out of the clock editor discards the edit and returns to settings.
+        s->mode = s->mode == AQ_MODE_CLOCK ? AQ_MODE_SETTINGS : AQ_MODE_HOME;
+        return;
+    }
+    if (key == AQ_KEY_OK) s->pressed_at = s->age;
     int delta = key == AQ_KEY_UP ? -1 : 1;
+    if (s->mode == AQ_MODE_SETTINGS) {
+        if (key != AQ_KEY_OK) { s->setting = (s->setting + delta + AQ_SETTINGS_ROWS) % AQ_SETTINGS_ROWS; return; }
+        if (s->setting == 0) { s->sound = !s->sound; note(s, s->sound ? "水声已打开" : "水声已关闭"); }
+        else if (s->setting == 1) { memcpy(s->clock_edit, s->now, sizeof s->clock_edit); s->clock_field = 0; s->mode = AQ_MODE_CLOCK; }
+        else s->mode = AQ_MODE_HOME;
+        return;
+    }
+    if (s->mode == AQ_MODE_CLOCK) {
+        int *v = s->clock_edit;
+        if (key != AQ_KEY_OK) {
+            // Year clamps at the ends so a burst of key repeats cannot jump from 2024 to 2099.
+            // Month / day / hour / minute still wrap, which is natural while adjusting.
+            int f = s->clock_field;
+            if (f == 0) {
+                v[0] -= delta;
+                if (v[0] < AQ_YEAR_MIN) v[0] = AQ_YEAR_MIN;
+                if (v[0] > AQ_YEAR_MAX) v[0] = AQ_YEAR_MAX;
+            } else {
+                const int lo[AQ_CLOCK_FIELDS] = {AQ_YEAR_MIN, 1, 1, 0, 0};
+                const int hi[AQ_CLOCK_FIELDS] = {AQ_YEAR_MAX, 12, aq_days_in_month(v[0], v[1]), 23, 59};
+                int span = hi[f] - lo[f] + 1;
+                v[f] = lo[f] + (v[f] - lo[f] - delta + span) % span;
+            }
+            int last = aq_days_in_month(v[0], v[1]);
+            if (v[2] > last) v[2] = last;
+            return;
+        }
+        if (++s->clock_field < AQ_CLOCK_FIELDS) return;
+        memcpy(s->clock_set, v, sizeof s->clock_set); s->clock_sets++;
+        s->mode = AQ_MODE_SETTINGS; note(s, "时间已更新");
+        return;
+    }
     if (s->mode == AQ_MODE_HOME) {
         if (key != AQ_KEY_OK) { s->selected = (s->selected + delta + AQ_HOME_BUTTONS) % AQ_HOME_BUTTONS; return; }
-        if (s->selected == 3) { s->sound = !s->sound; note(s, s->sound ? "水声已打开" : "水声已关闭"); return; }
+        if (s->selected == 3) { s->mode = AQ_MODE_SETTINGS; s->setting = 0; return; }
         if (s->selected == 0) {
             if (s->fed >= AQ_DAILY_FOOD) { note(s, "今天吃饱啦，明天再喂"); return; }
             if (s->pellet_count) { note(s, "等鱼儿吃完这一份"); return; }
